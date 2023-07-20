@@ -14,6 +14,7 @@
   "dependencies": {
     "@capacitor/android": "5.1.0",
     "@capacitor/app": "5.0.5",
+    "@capacitor/clipboard": "^5.0.6",
     "@capacitor/core": "5.1.0",
     "@capacitor/haptics": "5.0.5",
     "@capacitor/ios": "5.1.0",
@@ -24,6 +25,7 @@
     "@ionic/react-router": "^7.0.0",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
+    "copy-image-clipboard": "^2.1.2",
     "ethers": "^5.5.1",
     "i18next": "^23.2.6",
     "ionicons": "^7.0.0",

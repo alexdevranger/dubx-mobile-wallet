@@ -5,30 +5,16 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonButtons,
   IonButton,
   IonGrid,
   IonRow,
   IonCol,
-  IonImg,
   IonText,
   IonList,
-  IonItem,
-  IonLabel,
   IonIcon,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
-import { NavButtons } from "../components/NavButtons";
 import { useTranslation } from "react-i18next";
-import {
-  star,
-  arrowBackCircleOutline,
-  openOutline,
-  arrowRedoOutline,
-  trash,
-  qrCodeOutline,
-  refreshCircleOutline,
-} from "ionicons/icons";
+import { arrowBackCircleOutline } from "ionicons/icons";
 import "./Wallets.css";
 
 interface LangStorage {
@@ -40,10 +26,19 @@ const Languages: React.FC = () => {
   const [lang, setLang] = useState<LangStorage>({ language: "en" });
   const [isEN, setIsEN] = useState(true);
   const [isES, setIsES] = useState(false);
+  const [isAR, setIsAR] = useState(false);
+  const [isDE, setIsDE] = useState(false);
+  const [isRU, setIsRU] = useState(false);
+  const [isPL, setIsPL] = useState(false);
   const handleChangeLanguage = (language: string) => {
     i18n.changeLanguage(language);
     setLang({ language });
     localStorage.setItem("language", JSON.stringify({ language }));
+    if (language === "ar") {
+      document.documentElement.setAttribute("dir", "rtl");
+    } else {
+      document.documentElement.setAttribute("dir", "ltr");
+    }
   };
   useEffect(() => {
     const getLanguageFromStorage = localStorage.getItem("language") || "";
@@ -64,15 +59,51 @@ const Languages: React.FC = () => {
     if (lang.language === "en") {
       setIsEN(true);
       setIsES(false);
+      setIsAR(false);
+      setIsDE(false);
+      setIsRU(false);
+      setIsPL(false);
     } else if (lang.language === "es") {
       setIsEN(false);
       setIsES(true);
+      setIsAR(false);
+      setIsDE(false);
+      setIsRU(false);
+      setIsPL(false);
+    } else if (lang.language === "ar") {
+      setIsAR(true);
+      setIsDE(false);
+      setIsEN(false);
+      setIsES(false);
+      setIsRU(false);
+      setIsPL(false);
+    } else if (lang.language === "de") {
+      setIsEN(false);
+      setIsES(false);
+      setIsAR(false);
+      setIsDE(true);
+      setIsRU(false);
+      setIsPL(false);
+    } else if (lang.language === "ru") {
+      setIsEN(false);
+      setIsES(false);
+      setIsAR(false);
+      setIsDE(false);
+      setIsRU(true);
+      setIsPL(false);
+    } else if (lang.language === "pl") {
+      setIsEN(false);
+      setIsES(false);
+      setIsAR(false);
+      setIsDE(false);
+      setIsRU(false);
+      setIsPL(true);
     }
   }, [lang]);
 
   console.log(lang);
   return (
-    <IonPage>
+    <IonPage dir={lang.language === "ar" ? "rtl" : "ltr"}>
       <IonHeader>
         <IonToolbar>
           <IonTitle>{t("Languages")}</IonTitle>
@@ -92,8 +123,7 @@ const Languages: React.FC = () => {
         <IonGrid className="ion-text-center ion-grid">
           <IonRow className="ion-row">
             <IonCol size="12" className="logo-text">
-              {/* <IonImg className="logo" src="logo192.png" /> */}
-              <IonText color="secondary">
+              <IonText color="primary">
                 <h1
                   className="titleGradient"
                   style={{ textTransform: "uppercase" }}
@@ -103,66 +133,11 @@ const Languages: React.FC = () => {
                 <p className="subtitleP">
                   {t("Choose your preferred language")}
                 </p>
-                {/* <p className="subtitleP">Select desired language</p> */}
               </IonText>
             </IonCol>
           </IonRow>
         </IonGrid>
-        {/* <IonGrid className="ion-text-center ion-grid">
-          <IonRow className="ion-row">
-            <IonCol size="12">
-              <IonList className="list-wallets">
-                <IonItem
-                  className="item-card"
-                  style={{ width: "50%", textAlign: "center", margin: "auto" }}
-                >
-                  <div className="langHolder">
-                    <IonButton
-                      color={isEN ? "primary" : "medium"}
-                      fill="outline"
-                      onClick={() => {
-                        handleChangeLanguage("en");
-                        setIsEN(true);
-                        setIsES(false);
-                      }}
-                    >
-                      EN
-                    </IonButton>
-                    <IonLabel>
-                      <h2 className="wallName">English</h2>
-                    </IonLabel>
-                  </div>
-                </IonItem>
-                <IonItem
-                  className="item-card"
-                  style={{
-                    width: "50%",
-                    textAlign: "center",
-                    margin: "auto",
-                    marginTop: "20px",
-                  }}
-                >
-                  <div className="langHolder">
-                    <IonButton
-                      color={isES ? "primary" : "medium"}
-                      fill="outline"
-                      onClick={() => {
-                        handleChangeLanguage("es");
-                        setIsES(true);
-                        setIsEN(false);
-                      }}
-                    >
-                      ES
-                    </IonButton>
-                    <IonLabel>
-                      <h2 className="wallName">Espanjol</h2>
-                    </IonLabel>
-                  </div>
-                </IonItem>
-              </IonList>
-            </IonCol>
-          </IonRow>
-        </IonGrid> */}
+
         <IonGrid className="ion-text-center ion-grid">
           <IonRow className="ion-row">
             <IonCol size="12">
@@ -177,6 +152,10 @@ const Languages: React.FC = () => {
                       handleChangeLanguage("en");
                       setIsEN(true);
                       setIsES(false);
+                      setIsAR(false);
+                      setIsDE(false);
+                      setIsRU(false);
+                      setIsPL(false);
                     }}
                   >
                     EN
@@ -190,9 +169,81 @@ const Languages: React.FC = () => {
                       handleChangeLanguage("es");
                       setIsES(true);
                       setIsEN(false);
+                      setIsAR(false);
+                      setIsDE(false);
+                      setIsRU(false);
+                      setIsPL(false);
                     }}
                   >
                     ES
+                  </IonButton>
+                  <IonButton
+                    color={isAR ? "primary" : "medium"}
+                    fill="outline"
+                    expand="block"
+                    className="mb"
+                    onClick={() => {
+                      handleChangeLanguage("ar");
+                      setIsES(false);
+                      setIsEN(false);
+                      setIsAR(true);
+                      setIsDE(false);
+                      setIsRU(false);
+                      setIsPL(false);
+                    }}
+                  >
+                    AR
+                  </IonButton>
+                  <IonButton
+                    color={isDE ? "primary" : "medium"}
+                    fill="outline"
+                    expand="block"
+                    className="mb"
+                    onClick={() => {
+                      handleChangeLanguage("de");
+                      setIsES(false);
+                      setIsEN(false);
+                      setIsAR(false);
+                      setIsDE(true);
+                      setIsRU(false);
+                      setIsPL(false);
+                    }}
+                  >
+                    DE
+                  </IonButton>
+                  <IonButton
+                    color={isRU ? "primary" : "medium"}
+                    fill="outline"
+                    expand="block"
+                    className="mb"
+                    onClick={() => {
+                      handleChangeLanguage("ru");
+                      setIsES(false);
+                      setIsEN(false);
+                      setIsAR(false);
+                      setIsDE(false);
+                      setIsRU(true);
+                      setIsPL(false);
+                    }}
+                  >
+                    RU
+                  </IonButton>
+                  <IonButton
+                    color={isPL ? "primary" : "medium"}
+                    fill="outline"
+                    expand="block"
+                    className="mb"
+                    onClick={() => {
+                      handleChangeLanguage("pl");
+                      setIsES(false);
+                      setIsEN(false);
+                      setIsAR(false);
+                      setIsDE(false);
+                      setIsRU(false);
+                      setIsPL(true);
+                    }}
+                  >
+                    PL
                   </IonButton>
                 </div>
               </IonList>

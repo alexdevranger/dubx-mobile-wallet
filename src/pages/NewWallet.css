@@ -5,12 +5,8 @@
     rgb(139 80 199) 100%
   );
   margin-bottom: 30px;
-  /* background-image: url(https://crl2020.imgix.net/img/type-gradient.png?auto=format,compress); */
   --border-radius: 10px;
   font-weight: 700;
   height: 55px;
   letter-spacing: 0.2px;
 }
-/* .button-solid {
-  --background: linear-gradient(to right, #2c2c2c 0, rgb(18 18 18) 100%);
-} */

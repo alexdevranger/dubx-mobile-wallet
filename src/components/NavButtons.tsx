@@ -1,4 +1,4 @@
-import { IonButton, IonMenuButton } from "@ionic/react";
+import { IonMenuButton } from "@ionic/react";
 import React, { useEffect } from "react";
 
 export const NavButtons = () => {
@@ -13,20 +13,7 @@ export const NavButtons = () => {
     return () => mediaQuery.removeListener(setMQuery);
   }, []);
 
-  // MediaQueryListEvent { isTrusted: true, media: "(min-width: 768px)", matches: true ...}
-  console.log(mQuery.matches);
+  // console.log(mQuery.matches);
 
-  return (
-    <div>
-      {mQuery && !mQuery.matches ? (
-        <IonMenuButton />
-      ) : (
-        <>
-          <IonButton routerLink={"/wallets"}>Home </IonButton>
-          <IonButton routerLink={"/page-1"}>One </IonButton>
-          <IonButton routerLink={"/page-2"}>Two</IonButton>
-        </>
-      )}
-    </div>
-  );
+  return <div>{mQuery && <IonMenuButton />}</div>;
 };

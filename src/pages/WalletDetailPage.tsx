@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  IonItem,
   IonLabel,
-  IonList,
   IonContent,
   IonHeader,
   IonPage,
@@ -13,16 +11,14 @@ import {
   IonIcon,
   IonText,
   IonToast,
-  IonLoading,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ModalQRCode from "../components/ModalQRCode";
 import { useTranslation } from "react-i18next";
-import ModalCreateNewWallet from "../components/ModalCreateNewWallet";
 import { ethers } from "ethers";
 import { getBalance, createProvider } from "../utils/helper";
-import { QRCodeCanvas } from "qrcode.react";
+import { Clipboard } from "@capacitor/clipboard";
 import {
   star,
   arrowBackCircleOutline,
@@ -30,7 +26,6 @@ import {
   arrowRedoOutline,
   trash,
   qrCodeOutline,
-  refreshCircleOutline,
 } from "ionicons/icons";
 
 import "./WalletDetailPage.css";
@@ -67,27 +62,35 @@ const WalletDetailPage: React.FC = () => {
   };
 
   useEffect(() => {
+    document.documentElement.setAttribute(
+      "dir",
+      i18n.language === "ar" ? "rtl" : "ltr"
+    );
+  }, [i18n.language]);
+
+  useEffect(() => {
     const getAddrBalance = async (addr: string) => {
-      const balAddr: string = await getBalance(addr);
+      const savedNetwork: any = localStorage.getItem("provider") || "testnet";
+      const balAddr: string = await getBalance(addr, savedNetwork);
       setBalance(balAddr);
     };
     getAddrBalance(address);
-  }, []);
-  // Retrieve wallets from local storage
+  }, [location]);
+  console.log("balance111", balance);
   const walletsFromLocalStorage = JSON.parse(
     localStorage.getItem("wallets") || "[]"
   );
 
-  // Find the wallet that matches the address
   const matchedWallet = walletsFromLocalStorage.find(
     (wallet: any) => wallet.address === address
   );
 
-  // Extract name and private key from the matched wallet
   const { name, privateKey } = matchedWallet || {};
   const copyPrivateKey = async () => {
     try {
-      await navigator.clipboard.writeText(privateKey);
+      await Clipboard.write({
+        string: privateKey,
+      });
       setShowToast(true);
     } catch (error) {
       console.log("Error copying private key:", error);
@@ -95,17 +98,16 @@ const WalletDetailPage: React.FC = () => {
   };
   const sendDubx = async () => {
     try {
-      const provider = await createProvider();
+      const savedNetwork: any = localStorage.getItem("provider") || "testnet";
+      const provider = await createProvider(savedNetwork);
       const signer = new ethers.Wallet(privateKey, provider);
 
       const addrTo: string = (
         document.getElementById("addressTo") as HTMLInputElement
       ).value!.trim();
-      console.log(addrTo);
       const amountDubx: any = (
         document.getElementById("amount") as HTMLInputElement
       ).value!.trim();
-      console.log(amountDubx);
       if (!addrTo) {
         setError("Please enter address to send.");
         throw Error("Please enter address to send");
@@ -151,9 +153,10 @@ const WalletDetailPage: React.FC = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+  console.log(i18n.language);
 
   return (
-    <IonPage>
+    <IonPage dir={i18n.language === "ar" ? "rtl" : "ltr"}>
       <IonHeader>
         <IonToolbar>
           <IonTitle style={{ color: "#fff" }}>{name}</IonTitle>
@@ -177,7 +180,7 @@ const WalletDetailPage: React.FC = () => {
 
           <IonLabel>
             <div className="detail-holder">
-              <IonText color="secondary">
+              <IonText color="primary">
                 <div className="label-text-wrapper sc-ion-input-md">
                   <div className="label-text sc-ion-input-md">
                     {t("Address")}
@@ -191,7 +194,7 @@ const WalletDetailPage: React.FC = () => {
             <div className="flex-qr">
               <div className="balanceHolder">
                 <div className="detail-holder">
-                  <IonText color="secondary">
+                  <IonText color="primary">
                     <div className="label-text-wrapper sc-ion-input-md">
                       <div className="label-text sc-ion-input-md">
                         {t("Balance")} [ DUBX ]
@@ -216,13 +219,13 @@ const WalletDetailPage: React.FC = () => {
                     slot="end"
                     icon={qrCodeOutline}
                     size="large"
-                    color="primary"
+                    color="dark"
                   ></IonIcon>
                 </IonButton>
               </div>
             </div>
             <div className="detail-holder" style={{ marginTop: "20px" }}>
-              <IonText color="secondary">
+              <IonText color="primary">
                 <div className="label-text-wrapper sc-ion-input-md">
                   <div className="label-text sc-ion-input-md">
                     {t("Private Key")}
@@ -240,15 +243,16 @@ const WalletDetailPage: React.FC = () => {
               )}
             </IonText>
           </IonLabel>
-          <div style={{ textAlign: "center" }}>
+          <div className="btn-holder">
             <IonButton
               onClick={togglePrivateKeyVisibility}
               className="btn-pr"
               style={{ width: "100px" }}
+              color="sbtn"
             >
               {showPrivateKey ? t("Hide") : t("Show")}
             </IonButton>
-            <IonButton className="btn-pr" onClick={copyPrivateKey}>
+            <IonButton className="btn-pr" onClick={copyPrivateKey} color="sbtn">
               {t("Copy Private Key")}
             </IonButton>
           </div>
@@ -303,11 +307,7 @@ const WalletDetailPage: React.FC = () => {
               <p className="error-message">
                 <i>{t("Mining is in progress ...")}</i>
               </p>
-              {/* <IonLoading
-                isOpen={showLoading}
-                message="Please wait..."
-                spinner="dots"
-              /> */}
+
               <ul className="dotted">
                 <li></li>
                 <li></li>
@@ -340,30 +340,27 @@ const WalletDetailPage: React.FC = () => {
               slot="end"
               className="btn-remove"
             >
-              {t("remove")}
-              <br /> {t("wallet")}
+              {i18n.language === "de" ? (
+                <>
+                  {t("wallet")}
+                  <br />
+                  {t("remove")}
+                </>
+              ) : (
+                <>
+                  {t("remove")}
+                  <br />
+                  {t("wallet")}
+                </>
+              )}
               <IonIcon
                 slot="end"
                 icon={trash}
-                // style={{ paddingLeft: "7px" }}
                 size="large"
-                color="primary"
+                color="dark"
               ></IonIcon>
             </IonButton>
           </div>
-          {/* <IonButton onClick={generateQRCode}>Generate QR Code</IonButton> */}
-          {/* <IonButton onClick={handleOpenModal}>Open Modal</IonButton> */}
-          {/* {isModalOpen && ( */}
-          {/* <ModalQRCode address={address} onClose={handleCloseModal} /> */}
-          {/* )} */}
-          {/* <IonButton
-            className="btnImport"
-            style={{ marginTop: "40px" }}
-            expand="block"
-            onClick={() => setIsModalOpen(true)}
-          >
-            OPEN RANDOM WALLET
-          </IonButton> */}
           <ModalQRCode
             isOpen={isModalOpen}
             address={address}

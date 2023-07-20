@@ -1,0 +1,6 @@
+.alert-wrapper.sc-ion-alert-md {
+  background: hsla(0, 0%, 100%, 0.05) !important;
+  background-size: 150% !important;
+  border: 1px solid hsla(0, 0%, 100%, 0.3) !important;
+  border-radius: 16px !important;
+}

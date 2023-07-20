@@ -2,26 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   IonContent,
   IonHeader,
-  IonPage,
   IonTitle,
   IonToolbar,
-  IonInput,
-  IonLabel,
-  IonItem,
   IonButton,
-  useIonModal,
-  IonButtons,
-  IonIcon,
   IonModal,
-  IonText,
+  IonToast,
 } from "@ionic/react";
 import { useTranslation } from "react-i18next";
-import { ethers } from "ethers";
 import { useHistory } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
-import { OverlayEventDetail } from "@ionic/core/components";
-import { star, arrowBackCircleOutline } from "ionicons/icons";
-import ExploreContainer from "../components/ExploreContainer";
+import { Clipboard } from "@capacitor/clipboard";
 import "./Modals.css";
 
 interface ModalProps {
@@ -37,8 +27,9 @@ const ModalQRCode: React.FC<ModalProps> = ({
 }) => {
   const history = useHistory();
   const [t, i18n] = useTranslation("global");
+  const [showToast, setShowToast] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const qrRef = useRef();
+  const qrRef = useRef<HTMLDivElement>(null);
   const qrcode = (
     <QRCodeCanvas
       id="qrCode"
@@ -56,6 +47,29 @@ const ModalQRCode: React.FC<ModalProps> = ({
     throw Error("Error Generating QR code.");
   }
 
+  const copyAddress = async () => {
+    try {
+      await Clipboard.write({
+        string: address,
+      });
+      setShowToast(true);
+    } catch (error) {
+      console.log("Error copying private key:", error);
+    }
+  };
+  // const saveAsImage = (e: any) => {
+  //   e.preventDefault();
+  //   let canvas = qrRef.current.querySelector("canvas");
+  //   console.log(canvas);
+  //   const pngUrl = canvas.toDataURL("image/png");
+  //   console.log(pngUrl);
+  //   let anchor = document.createElement("a");
+  //   anchor.href = pngUrl;
+  //   anchor.download = `${address}.png`;
+  //   document.body.appendChild(anchor);
+  //   anchor.click();
+  //   document.body.removeChild(anchor);
+  // };
   return (
     <IonModal
       isOpen={isOpen}
@@ -82,10 +96,23 @@ const ModalQRCode: React.FC<ModalProps> = ({
         <div ref={qrRef} className="mt-3">
           {qrcode}
         </div>
-        <IonText color="danger" style={{ textAlign: "center" }}>
-          <p>{t("Share your address to receive DUBX.")}</p>
-        </IonText>
         {error && <p className="error-message">{error}</p>}
+
+        <div className="btn-holder">
+          <IonButton onClick={copyAddress} className="btn-pr" color="sbtn">
+            Copy Address
+          </IonButton>
+          {/* <IonButton className="btn-pr" color="sbtn" onClick={saveAsImage}>
+            {t("Save as Image")}
+          </IonButton> */}
+        </div>
+        <IonToast
+          isOpen={showToast}
+          message="Copied"
+          duration={2000}
+          cssClass="custom-toast"
+          onDidDismiss={() => setShowToast(false)}
+        />
       </IonContent>
     </IonModal>
   );

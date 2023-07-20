@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
-  IonItem,
   IonLabel,
-  IonList,
   IonContent,
   IonHeader,
   IonPage,
   IonTitle,
   IonToolbar,
   IonButton,
-  IonInput,
   IonIcon,
   IonText,
   IonToast,
@@ -17,15 +14,7 @@ import {
 import { useHistory, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ethers } from "ethers";
-import { getBalance, createProvider } from "../utils/helper";
-import {
-  star,
-  arrowBackCircleOutline,
-  openOutline,
-  arrowRedoOutline,
-  trash,
-} from "ionicons/icons";
+import { arrowBackCircleOutline } from "ionicons/icons";
 import "./WalletDetailPage.css";
 
 interface WalletRemovePage {
@@ -42,6 +31,13 @@ const WalletRemovePage: React.FC = () => {
 
   const history = useHistory();
   const location = useLocation();
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "dir",
+      i18n.language === "ar" ? "rtl" : "ltr"
+    );
+  }, [i18n.language]);
 
   const walletsFromLocalStorage = JSON.parse(
     localStorage.getItem("wallets") || "[]"
@@ -62,22 +58,18 @@ const WalletRemovePage: React.FC = () => {
   };
   const deleteWallet = async () => {
     try {
-      // Find the index of the matched wallet in the array
       const walletIndex = walletsFromLocalStorage.findIndex(
         (wallet: any) => wallet.address === address
       );
 
-      // Remove the wallet from the array if it exists
       if (walletIndex !== -1) {
         walletsFromLocalStorage.splice(walletIndex, 1);
 
-        // Update the local storage with the modified array
         localStorage.setItem(
           "wallets",
           JSON.stringify(walletsFromLocalStorage)
         );
 
-        // Redirect to the wallets page or perform any other desired action
         history.push("/wallets");
       } else {
         setError("Wallet not found");
@@ -88,7 +80,7 @@ const WalletRemovePage: React.FC = () => {
   };
 
   return (
-    <IonPage>
+    <IonPage dir={i18n.language === "ar" ? "rtl" : "ltr"}>
       <IonHeader>
         <IonToolbar>
           <IonTitle>{name}</IonTitle>
@@ -110,7 +102,7 @@ const WalletRemovePage: React.FC = () => {
 
         <IonLabel>
           <div className="detail-holder">
-            <IonText color="secondary">
+            <IonText color="primary">
               <div className="label-text-wrapper sc-ion-input-md">
                 <div className="label-text sc-ion-input-md">Name</div>
               </div>
@@ -120,7 +112,7 @@ const WalletRemovePage: React.FC = () => {
             <p>{name}</p>
           </IonText>
           <div className="detail-holder">
-            <IonText color="secondary">
+            <IonText color="primary">
               <div className="label-text-wrapper sc-ion-input-md">
                 <div className="label-text sc-ion-input-md">Address</div>
               </div>
@@ -134,14 +126,14 @@ const WalletRemovePage: React.FC = () => {
           className="detail-holder center"
           style={{ marginTop: "30px", marginBottom: "15px" }}
         >
-          <IonText color="secondary" className="error-message">
+          <IonText color="primary" className="error-message">
             <div className="label-text-wrapper sc-ion-input-md">
               <div className="label-text sc-ion-input-md">WARNING</div>
             </div>
           </IonText>
         </div>
         <div className="detail-holder">
-          <IonText color="secondary" className="warning-message">
+          <IonText color="primary" className="warning-message">
             <div className="label-text-wrapper">
               <div className="label-text">
                 Are you sure you want to delete your wallet? Please ensure that
@@ -174,9 +166,6 @@ const WalletRemovePage: React.FC = () => {
         />
       </IonContent>
     </IonPage>
-
-    // Render the wallet details
-    // ...
   );
 };
 

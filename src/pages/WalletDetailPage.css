@@ -75,8 +75,7 @@
 }
 
 .sendHolder.visible {
-  max-height: 500px; /* Adjust the value as per your needs */
-  /* padding: 10px; */
+  max-height: 500px;
 }
 .error-message {
   color: #f373bf;
@@ -100,23 +99,14 @@
   margin-top: 30px;
 }
 .btn-pr {
-  color: #673ab7;
+  color: #673ab7 !important;
   font-weight: 800;
   letter-spacing: -0.8px;
   font-size: 11px;
+  background: #f4f5f8;
+  border-radius: 6px;
 }
-/* .btn-remove {
-  text-transform: lowercase;
-  font-size: 10px;
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-} */
-/* .remove-wallet-container {
-  position: sticky;
-  bottom: 0;
-  z-index: 1;
-} */
+
 .mt40 {
   margin-top: 40px;
 }
@@ -129,6 +119,11 @@
   text-transform: lowercase;
   font-size: 10px;
   float: right !important ;
+}
+[dir="rtl"] .btn-remove {
+  text-transform: lowercase;
+  font-size: 10px;
+  float: left !important;
 }
 .btn-qr {
   text-transform: lowercase;
@@ -144,15 +139,3 @@
   display: flex;
   flex-direction: column;
 }
-/* .profile-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-} */
-
-/* ion-item {
-  --border-color: pink;
-  --border-style: solid;
-  --border-width: 2px;
-  --border-radius: 8px;
-} */

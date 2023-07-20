@@ -1,17 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   IonContent,
   IonHeader,
   IonPage,
   IonTitle,
   IonToolbar,
-  IonInput,
-  IonLabel,
-  IonItem,
   IonButton,
-  useIonModal,
-  IonModal,
-  IonButtons,
   IonIcon,
   IonGrid,
   IonRow,
@@ -20,15 +14,10 @@ import {
   IonText,
 } from "@ionic/react";
 import { useTranslation } from "react-i18next";
-import { ethers } from "ethers";
-import { useHistory } from "react-router-dom";
-import useWalletsService from "../hooks/useWalletsService";
 import ModalCreateNewWallet from "../components/ModalCreateNewWallet";
 import ModalImportFromPrivate from "../components/ModalImportFromPrivate";
 import ModalImportFromKeystore from "../components/ModalImportFromKeystore";
-import { OverlayEventDetail } from "@ionic/core/components";
-import { star, arrowBackCircleOutline } from "ionicons/icons";
-import ExploreContainer from "../components/ExploreContainer";
+import { arrowBackCircleOutline } from "ionicons/icons";
 import "./NewWallet.css";
 
 interface Wallet {
@@ -40,22 +29,21 @@ interface Wallet {
 
 const NewWallet: React.FC = () => {
   const [t, i18n] = useTranslation("global");
-  const [newWallet, setNewWallet] = useState<Wallet>({
-    name: "",
-    address: "",
-    privateKey: "",
-    password: "",
-  });
-  const { addWallet } = useWalletsService();
-  const history = useHistory();
   const [openModalNewWallet, setOpenModalNewWallet] = useState(false);
   const [openModalWalletFromPrivate, setOpenModalWalletFromPrivate] =
     useState(false);
   const [openModalWalletFromKeystore, setOpenModalWalletFromKeystore] =
     useState(false);
 
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "dir",
+      i18n.language === "ar" ? "rtl" : "ltr"
+    );
+  }, [i18n.language]);
+
   return (
-    <IonPage id="new-wallet">
+    <IonPage id="new-wallet" dir={i18n.language === "ar" ? "rtl" : "ltr"}>
       <IonHeader>
         <IonToolbar>
           <IonTitle> {t("New Wallet")}</IonTitle>
@@ -76,8 +64,7 @@ const NewWallet: React.FC = () => {
           <IonRow className="ion-row">
             <IonCol size="12" className="logo-text">
               <IonImg className="logo" src="logo192.png" />
-              <IonText color="secondary">
-                {/* <h1 className="titleGradient">DUBX WALLETS</h1> */}
+              <IonText color="primary">
                 <p className="subtitleP">{t("Create new or")}</p>
                 <p> {t("Import Existing")}</p>
               </IonText>

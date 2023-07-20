@@ -13,9 +13,7 @@ import {
 import { IonReactRouter } from "@ionic/react-router";
 import { useTranslation } from "react-i18next";
 import Home from "./pages/Wallets";
-import Details from "./pages/Details";
 import NewWallet from "./pages/NewWallet";
-import Persona from "./pages/Persona";
 import Menu from "./components/Menu";
 
 /* Core CSS required for Ionic components to work properly */
@@ -36,10 +34,11 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import { wallet, star } from "ionicons/icons";
+import { wallet, star, settingsSharp } from "ionicons/icons";
 import WalletDetailPage from "./pages/WalletDetailPage";
 import WalletRemovePage from "./pages/WalletRemovePage";
 import Languages from "./pages/Languages";
+import Settings from "./pages/Settings";
 
 setupIonicReact();
 
@@ -63,17 +62,14 @@ const App: React.FC = () => {
             <Route exact path="/delete/:address">
               <WalletRemovePage />
             </Route>
-            <Route exact path="/details">
-              <Details />
-            </Route>
             <Route exact path="/new-wallet">
               <NewWallet />
             </Route>
             <Route exact path="/languages">
               <Languages />
             </Route>
-            <Route exact path="/persona">
-              <Persona />
+            <Route exact path="/settings">
+              <Settings />
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
@@ -84,6 +80,10 @@ const App: React.FC = () => {
             <IonTabButton tab="languages" href="/languages">
               <IonIcon icon={star} style={{ color: "white" }} />
               <IonLabel style={{ color: "#3ce0f5" }}>{t("Languages")}</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="settings" href="/settings">
+              <IonIcon icon={settingsSharp} style={{ color: "white" }} />
+              <IonLabel style={{ color: "#3ce0f5" }}>{t("Settings")}</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>

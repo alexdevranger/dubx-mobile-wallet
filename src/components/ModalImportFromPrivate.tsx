@@ -1,27 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   IonContent,
   IonHeader,
-  IonPage,
   IonTitle,
   IonToolbar,
   IonInput,
-  IonLabel,
-  IonItem,
   IonButton,
-  useIonModal,
-  IonButtons,
-  IonIcon,
   IonModal,
+  IonText,
 } from "@ionic/react";
 import { useTranslation } from "react-i18next";
 import { ethers } from "ethers";
 import { useHistory } from "react-router-dom";
-import useWalletsService from "../hooks/useWalletsService";
 import { createProvider } from "../utils/helper";
-import { OverlayEventDetail } from "@ionic/core/components";
-import { star, arrowBackCircleOutline } from "ionicons/icons";
-import ExploreContainer from "../components/ExploreContainer";
 import "./Modals.css";
 
 interface ModalProps {
@@ -46,9 +37,9 @@ const ModalImportFromPrivate: React.FC<ModalProps> = ({
     name: string
   ) => {
     try {
-      const provider = await createProvider();
+      const savedNetwork: any = localStorage.getItem("provider") || "testnet";
+      const provider = await createProvider(savedNetwork);
       const wallet = await new ethers.Wallet(privateKey, provider);
-      console.log(wallet);
       if (
         wallet &&
         ethers.utils.isAddress(wallet.address) &&
@@ -74,11 +65,6 @@ const ModalImportFromPrivate: React.FC<ModalProps> = ({
       }
     } catch (error: any) {
       console.log("An error occurred:", error);
-      //   if (error.code === ethers.utils.Logger.errors.INVALID_ARGUMENT) {
-      //     setError("Private key is not correct");
-      //   } else {
-      //     console.log("An error occurred:", error);
-      //   }
     }
   };
   const importAndBack = async (event: any) => {
@@ -107,8 +93,6 @@ const ModalImportFromPrivate: React.FC<ModalProps> = ({
       history.push("/wallets");
     } catch (err: any) {
       if (err.code === ethers.errors.INVALID_ARGUMENT) {
-        console.log("KODE", err.code);
-        console.log("not correct");
         setError("Private key is not correct");
         throw Error("Please enter a correct private key");
       } else {
@@ -132,24 +116,40 @@ const ModalImportFromPrivate: React.FC<ModalProps> = ({
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonInput
-          type="text"
-          id="newFromPrivate"
-          labelPlacement="stacked"
-          label={t("Enter Private Key")}
-          placeholder=""
-        />
-        <IonInput
-          type="text"
-          id="newNameFromPrivate"
-          labelPlacement="stacked"
-          label={t("Enter Name")}
-          placeholder=""
-        />
-        {error && <p className="error-message">{error}</p>}
-        <IonButton className="btnImp" expand="block" onClick={importAndBack}>
-          {t("Confirm")}
-        </IonButton>
+        <div className="flex ion-text-center">
+          <div>
+            <IonText color="primary">
+              <h1
+                className="titleGradient"
+                style={{ textTransform: "uppercase", marginBottom: "50px" }}
+              >
+                {t("Import from private key")}
+              </h1>
+            </IonText>
+            <IonInput
+              type="text"
+              id="newFromPrivate"
+              labelPlacement="stacked"
+              label={t("Enter Private Key")}
+              placeholder=""
+            />
+            <IonInput
+              type="text"
+              id="newNameFromPrivate"
+              labelPlacement="stacked"
+              label={t("Enter Name")}
+              placeholder=""
+            />
+            {error && <p className="error-message">{error}</p>}
+            <IonButton
+              className="btnImp"
+              expand="block"
+              onClick={importAndBack}
+            >
+              {t("Confirm")}
+            </IonButton>
+          </div>
+        </div>
       </IonContent>
     </IonModal>
   );

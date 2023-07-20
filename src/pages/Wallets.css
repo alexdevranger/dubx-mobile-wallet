@@ -24,7 +24,7 @@
 h1.titleGradient {
   background-clip: text;
   -webkit-background-clip: text;
-  background-image: url(https://crl2020.imgix.net/img/type-gradient.png?auto=format%2Ccompress);
+  background-image: url("../images/type-gradient.png");
   color: transparent;
   font-family: Poppins, sans-serif;
   font-weight: 700 !important;
@@ -62,7 +62,7 @@ h2.wallName {
   font-size: 20px;
   background-clip: text;
   -webkit-background-clip: text;
-  background-image: url(https://crl2020.imgix.net/img/type-gradient.png?auto=format%2Ccompress);
+  background-image: url("../images/type-gradient.png");
   color: transparent;
   font-family: Poppins, sans-serif;
   font-weight: 700 !important;
@@ -75,19 +75,5 @@ h2.wallName {
 }
 .flex-lang {
   display: flex;
+  flex-direction: column;
 }
-/* .ion-content {
-  --background: rgb(71 56 119 / 52%) !important;
-  --background-image: linear-gradient(at 0 0, #100f15 0, transparent 60%),
-    radial-gradient(at 50% 0, #2f3e6a 0, transparent 60%),
-    radial-gradient(at 100% 0, #5a25a1 0, transparent 60%);
-} */
-/* .ion-grid {
-  height: 100%;
-}
-.ion-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-} */

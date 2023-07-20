@@ -37,5 +37,8 @@
   "wallet": "wallet",
   "Hide": "Hide",
   "Show": "Show",
-  "Choose your preferred language": "Choose your preferred language"
+  "Choose your preferred language": "Choose your preferred language",
+  "CHANGE NETWORK": "CHANGE NETWORK",
+  "Settings": "Settings",
+  "Create Wallet": "Create Wallet"
 }

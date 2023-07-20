@@ -2,26 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   IonContent,
   IonHeader,
-  IonPage,
   IonTitle,
   IonToolbar,
   IonInput,
-  IonLabel,
-  IonItem,
   IonButton,
-  useIonModal,
-  IonButtons,
-  IonIcon,
   IonModal,
+  IonText,
 } from "@ionic/react";
 import { useTranslation } from "react-i18next";
 import { ethers } from "ethers";
 import { useHistory } from "react-router-dom";
-import useWalletsService from "../hooks/useWalletsService";
-import { createProvider } from "../utils/helper";
-import { OverlayEventDetail } from "@ionic/core/components";
-import { star, arrowBackCircleOutline } from "ionicons/icons";
-import ExploreContainer from "../components/ExploreContainer";
 import "./Modals.css";
 
 interface ModalProps {
@@ -43,7 +33,6 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
 
   const createRandomWallet = async (name: string) => {
     const wallet = await ethers.Wallet.createRandom();
-    console.log(wallet);
     if (
       wallet &&
       ethers.utils.isAddress(wallet.address) &&
@@ -55,7 +44,6 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
         privateKey: wallet.privateKey.substring(2, 66),
         password: "",
       };
-      console.log(newWall);
       const walletsFromLocalstorage = await JSON.parse(
         localStorage.getItem("wallets") || "[]"
       );
@@ -93,21 +81,37 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
           >
             {t("Cancel")}
           </IonButton>
-          <IonTitle>{t("Import Wallet")}</IonTitle>
+          <IonTitle>{t("Create Wallet")}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonInput
-          type="text"
-          id="newNameFromPrivate"
-          labelPlacement="stacked"
-          label={t("Enter Name")}
-          placeholder=""
-        />
-        {error && <p className="error-message text-center">{error}</p>}
-        <IonButton className="btnImp" expand="block" onClick={importAndBack}>
-          {t("Confirm")}
-        </IonButton>
+        <div className="flex ion-text-center">
+          <div>
+            <IonText color="primary">
+              <h1
+                className="titleGradient"
+                style={{ textTransform: "uppercase", marginBottom: "50px" }}
+              >
+                {t("Create new wallet")}
+              </h1>
+            </IonText>
+            <IonInput
+              type="text"
+              id="newNameFromPrivate"
+              labelPlacement="stacked"
+              label={t("Enter Name")}
+              placeholder=""
+            />
+            {error && <p className="error-message text-center">{error}</p>}
+            <IonButton
+              className="btnImp"
+              expand="block"
+              onClick={importAndBack}
+            >
+              {t("Confirm")}
+            </IonButton>
+          </div>
+        </div>
       </IonContent>
     </IonModal>
   );
