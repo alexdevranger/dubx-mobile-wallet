@@ -117,7 +117,7 @@ const Home: React.FC = () => {
         </IonGrid>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton id="myFabButton" onClick={newWallet}>
-            <IonIcon icon={add} />
+            <IonIcon icon={add} style={{ color: "#3d3d3d" }} />
           </IonFabButton>
         </IonFab>
       </IonContent>

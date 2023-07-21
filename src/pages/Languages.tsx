@@ -30,6 +30,7 @@ const Languages: React.FC = () => {
   const [isDE, setIsDE] = useState(false);
   const [isRU, setIsRU] = useState(false);
   const [isPL, setIsPL] = useState(false);
+  const [isSK, setIsSK] = useState(false);
   const handleChangeLanguage = (language: string) => {
     i18n.changeLanguage(language);
     setLang({ language });
@@ -63,6 +64,7 @@ const Languages: React.FC = () => {
       setIsDE(false);
       setIsRU(false);
       setIsPL(false);
+      setIsSK(false);
     } else if (lang.language === "es") {
       setIsEN(false);
       setIsES(true);
@@ -70,6 +72,7 @@ const Languages: React.FC = () => {
       setIsDE(false);
       setIsRU(false);
       setIsPL(false);
+      setIsSK(false);
     } else if (lang.language === "ar") {
       setIsAR(true);
       setIsDE(false);
@@ -77,6 +80,7 @@ const Languages: React.FC = () => {
       setIsES(false);
       setIsRU(false);
       setIsPL(false);
+      setIsSK(false);
     } else if (lang.language === "de") {
       setIsEN(false);
       setIsES(false);
@@ -84,6 +88,7 @@ const Languages: React.FC = () => {
       setIsDE(true);
       setIsRU(false);
       setIsPL(false);
+      setIsSK(false);
     } else if (lang.language === "ru") {
       setIsEN(false);
       setIsES(false);
@@ -91,6 +96,7 @@ const Languages: React.FC = () => {
       setIsDE(false);
       setIsRU(true);
       setIsPL(false);
+      setIsSK(false);
     } else if (lang.language === "pl") {
       setIsEN(false);
       setIsES(false);
@@ -98,6 +104,15 @@ const Languages: React.FC = () => {
       setIsDE(false);
       setIsRU(false);
       setIsPL(true);
+      setIsSK(false);
+    } else if (lang.language === "sk") {
+      setIsEN(false);
+      setIsES(false);
+      setIsAR(false);
+      setIsDE(false);
+      setIsRU(false);
+      setIsPL(false);
+      setIsSK(true);
     }
   }, [lang]);
 
@@ -156,6 +171,7 @@ const Languages: React.FC = () => {
                       setIsDE(false);
                       setIsRU(false);
                       setIsPL(false);
+                      setIsSK(false);
                     }}
                   >
                     EN
@@ -173,6 +189,7 @@ const Languages: React.FC = () => {
                       setIsDE(false);
                       setIsRU(false);
                       setIsPL(false);
+                      setIsSK(false);
                     }}
                   >
                     ES
@@ -190,6 +207,7 @@ const Languages: React.FC = () => {
                       setIsDE(false);
                       setIsRU(false);
                       setIsPL(false);
+                      setIsSK(false);
                     }}
                   >
                     AR
@@ -207,6 +225,7 @@ const Languages: React.FC = () => {
                       setIsDE(true);
                       setIsRU(false);
                       setIsPL(false);
+                      setIsSK(false);
                     }}
                   >
                     DE
@@ -224,6 +243,7 @@ const Languages: React.FC = () => {
                       setIsDE(false);
                       setIsRU(true);
                       setIsPL(false);
+                      setIsSK(false);
                     }}
                   >
                     RU
@@ -241,9 +261,28 @@ const Languages: React.FC = () => {
                       setIsDE(false);
                       setIsRU(false);
                       setIsPL(true);
+                      setIsSK(false);
                     }}
                   >
                     PL
+                  </IonButton>
+                  <IonButton
+                    color={isSK ? "primary" : "medium"}
+                    fill="outline"
+                    expand="block"
+                    className="mb"
+                    onClick={() => {
+                      handleChangeLanguage("sk");
+                      setIsES(false);
+                      setIsEN(false);
+                      setIsAR(false);
+                      setIsDE(false);
+                      setIsRU(false);
+                      setIsPL(false);
+                      setIsSK(true);
+                    }}
+                  >
+                    SK
                   </IonButton>
                 </div>
               </IonList>

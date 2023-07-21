@@ -34,8 +34,6 @@ const Menu = () => {
     const savedNetwork = localStorage.getItem("provider");
     setCurrentNetwork(savedNetwork || "TESTNET");
   }, [location]);
-  console.log(currentLanguage);
-  console.log(currentNetwork);
   return (
     <IonMenu side="end" contentId="main">
       <IonHeader>
