@@ -4,3 +4,19 @@
   border: 1px solid hsla(0, 0%, 100%, 0.3) !important;
   border-radius: 16px !important;
 }
+.flex-lang {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+}
+.language-button {
+  margin: 4px;
+}
+.custom-button {
+  --border-width: 1px; /* Adjust the border width as needed */
+  --border-color: #ccc; /* Adjust the border color as needed */
+  border-width: var(--border-width);
+  border-color: var(--border-color);
+  border-style: solid;
+}

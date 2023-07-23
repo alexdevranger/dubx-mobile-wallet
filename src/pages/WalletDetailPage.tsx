@@ -11,6 +11,9 @@ import {
   IonIcon,
   IonText,
   IonToast,
+  IonGrid,
+  IonRow,
+  IonCol,
   InputChangeEventDetail,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router-dom";
@@ -43,6 +46,7 @@ const WalletDetailPage: React.FC = () => {
   const [showPrivateKey, setShowPrivateKey] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [balance, setBalance] = useState("0.00");
+  const [currentNetwork, setCurrentNetwork] = useState("");
   const [isSendHolderVisible, setIsSendHolderVisible] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pendingTx, setPendingTx] = useState(false);
@@ -83,6 +87,7 @@ const WalletDetailPage: React.FC = () => {
       const savedNetwork: any = localStorage.getItem("provider") || "testnet";
       const balAddr: string = await getBalance(addr, savedNetwork);
       setBalance(balAddr);
+      setCurrentNetwork(savedNetwork);
     };
     getAddrBalance(address);
   }, [location]);
@@ -256,13 +261,40 @@ const WalletDetailPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
+        <IonGrid className="ion-text-center ion-grid">
+          <IonRow className="ion-row">
+            <IonCol size="12" className="logo-text">
+              <IonText color="primary">
+                <h1
+                  className="titleGradient"
+                  style={{ textTransform: "uppercase" }}
+                >
+                  {t("Wallet detail")}
+                </h1>
+              </IonText>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+
         <div className="page-container">
-          <div className="image-container">
+          {/* <div className="image-container">
             <img className="" src="ukras.webp" alt="Detail" />
-          </div>
+          </div> */}
 
           <IonLabel>
             <div className="detail-holder">
+              <IonText color="danger">
+                <div className="label-text-wrapper sc-ion-input-md">
+                  <div className="label-text sc-ion-input-md">
+                    {t("Network")}
+                  </div>
+                </div>
+              </IonText>
+            </div>
+            <IonText color="dark">
+              <p>{currentNetwork}</p>
+            </IonText>
+            <div className="detail-holder mt20">
               <IonText color="danger">
                 <div className="label-text-wrapper sc-ion-input-md">
                   <div className="label-text sc-ion-input-md">
@@ -353,7 +385,7 @@ const WalletDetailPage: React.FC = () => {
               style={{ paddingLeft: "7px" }}
             ></IonIcon>
             <button className="clearall" id="btn-reset" onClick={clearAll}>
-              clear
+              Clear
             </button>
           </h2>
           <div

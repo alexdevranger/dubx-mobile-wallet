@@ -94,6 +94,10 @@
   text-align: center;
   --background: transparent !important;
 }
+.warning-grey {
+  color: #797979;
+  text-align: left;
+}
 .mining-btn-toggle {
   color: #797979;
   text-align: center;
@@ -101,6 +105,18 @@
   margin: auto;
   border: 1px solid grey;
   width: 66%;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.warningH2 {
+  color: #797979;
+  text-align: center;
+  --background: transparent !important;
+  margin: auto;
+  border: 1px solid grey;
   border-radius: 6px;
   display: flex;
   justify-content: center;
@@ -129,7 +145,6 @@
   background: #f4f5f8;
   border-radius: 6px;
 }
-
 .mt40 {
   margin-top: 40px;
 }
@@ -144,17 +159,17 @@
   padding-bottom: 60px;
 }
 .btn-remove {
-  text-transform: lowercase;
+  text-transform: none;
   font-size: 10px;
   float: right !important ;
 }
 [dir="rtl"] .btn-remove {
-  text-transform: lowercase;
+  text-transform: none;
   font-size: 10px;
   float: left !important;
 }
 .btn-qr {
-  text-transform: lowercase;
+  text-transform: none;
   font-size: 10px;
 }
 .flex-qr {

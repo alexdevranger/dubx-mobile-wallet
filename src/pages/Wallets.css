@@ -77,3 +77,11 @@ h2.wallName {
   display: flex;
   flex-direction: column;
 }
+.iconImport {
+  background: aqua;
+  border-radius: 100%;
+  padding-top: 6px;
+  padding-left: 6px;
+  padding-right: 6px;
+  color: #3d3d3d;
+}

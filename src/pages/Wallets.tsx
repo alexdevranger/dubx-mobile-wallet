@@ -81,7 +81,10 @@ const Home: React.FC = () => {
               <IonText color="primary">
                 <h1 className="titleGradient">{t("DUBX_WALLETS")}</h1>
                 <p className="subtitleP">
-                  {t("Click icon")} <span className="addButtonText">+</span>{" "}
+                  {t("Click icon")}{" "}
+                  <span className="addButtonText iconImport">
+                    <IonIcon icon={add} />
+                  </span>{" "}
                   {t("to import wallet")}
                 </p>
               </IonText>

@@ -39,6 +39,7 @@ import WalletDetailPage from "./pages/WalletDetailPage";
 import WalletRemovePage from "./pages/WalletRemovePage";
 import Languages from "./pages/Languages";
 import Settings from "./pages/Settings";
+import SettingsPage from "./pages/SettingsPage";
 
 setupIonicReact();
 
@@ -68,8 +69,11 @@ const App: React.FC = () => {
             <Route exact path="/languages">
               <Languages />
             </Route>
-            <Route exact path="/settings">
+            {/* <Route exact path="/settings">
               <Settings />
+            </Route> */}
+            <Route exact path="/settings-page">
+              <SettingsPage />
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
@@ -77,11 +81,11 @@ const App: React.FC = () => {
               <IonIcon icon={wallet} style={{ color: "white" }} />
               <IonLabel style={{ color: "#3ce0f5" }}>{t("Wallets")}</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="languages" href="/languages">
+            {/* <IonTabButton tab="languages" href="/languages">
               <IonIcon icon={star} style={{ color: "white" }} />
               <IonLabel style={{ color: "#3ce0f5" }}>{t("Languages")}</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="settings" href="/settings">
+            </IonTabButton> */}
+            <IonTabButton tab="settings" href="/settings-page">
               <IonIcon icon={settingsSharp} style={{ color: "white" }} />
               <IonLabel style={{ color: "#3ce0f5" }}>{t("Settings")}</IonLabel>
             </IonTabButton>

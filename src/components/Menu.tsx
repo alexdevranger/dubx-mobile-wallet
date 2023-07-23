@@ -49,10 +49,14 @@ const Menu = () => {
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle auto-hide="false">
-            <IonItem button routerLink={"/languages"} routerDirection="none">
+            {/* <IonItem button routerLink={"/languages"} routerDirection="none">
               <IonLabel>Languages</IonLabel>
-            </IonItem>
-            <IonItem button routerLink={"/settings"} routerDirection="none">
+            </IonItem> */}
+            <IonItem
+              button
+              routerLink={"/settings-page"}
+              routerDirection="none"
+            >
               <IonLabel>Settings</IonLabel>
             </IonItem>
           </IonMenuToggle>

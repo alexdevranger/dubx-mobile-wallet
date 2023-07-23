@@ -10,6 +10,9 @@ import {
   IonIcon,
   IonText,
   IonToast,
+  IonGrid,
+  IonRow,
+  IonCol,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -96,13 +99,27 @@ const WalletRemovePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <div className="image-container">
+        {/* <div className="image-container">
           <img className="" src="ukras.webp" alt="Detail" />
-        </div>
+        </div> */}
+        <IonGrid className="ion-text-center ion-grid">
+          <IonRow className="ion-row">
+            <IonCol size="12" className="logo-text">
+              <IonText color="primary">
+                <h1
+                  className="titleGradient"
+                  style={{ textTransform: "uppercase" }}
+                >
+                  {t("Delete Wallet")}
+                </h1>
+              </IonText>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
 
         <IonLabel>
           <div className="detail-holder">
-            <IonText color="primary">
+            <IonText color="danger">
               <div className="label-text-wrapper sc-ion-input-md">
                 <div className="label-text sc-ion-input-md">Name</div>
               </div>
@@ -112,7 +129,7 @@ const WalletRemovePage: React.FC = () => {
             <p>{name}</p>
           </IonText>
           <div className="detail-holder">
-            <IonText color="primary">
+            <IonText color="danger">
               <div className="label-text-wrapper sc-ion-input-md">
                 <div className="label-text sc-ion-input-md">Address</div>
               </div>
@@ -126,14 +143,21 @@ const WalletRemovePage: React.FC = () => {
           className="detail-holder center"
           style={{ marginTop: "30px", marginBottom: "15px" }}
         >
-          <IonText color="primary" className="error-message">
-            <div className="label-text-wrapper sc-ion-input-md">
-              <div className="label-text sc-ion-input-md">WARNING</div>
-            </div>
+          <IonText className="error-message">
+            <h2
+              className="easySend warningH2 mt20"
+              style={{
+                position: "relative",
+                fontWeight: "700",
+                fontSize: "20px",
+              }}
+            >
+              {t("WARNING")}
+            </h2>
           </IonText>
         </div>
-        <div className="detail-holder">
-          <IonText color="primary" className="warning-message">
+        <div className="detail-holder mt40">
+          <IonText color="primary" className="warning-grey">
             <div className="label-text-wrapper">
               <div className="label-text">
                 Are you sure you want to delete your wallet? Please ensure that
@@ -148,11 +172,11 @@ const WalletRemovePage: React.FC = () => {
           </IonText>
         </div>
 
-        <div style={{ textAlign: "center", marginTop: "30px" }}>
-          <IonButton className="btn-pr" onClick={copyPrivateKey}>
+        <div className="btn-holder mt40">
+          <IonButton className="btn-pr" color="sbtn" onClick={copyPrivateKey}>
             Copy Private Key
           </IonButton>
-          <IonButton onClick={deleteWallet} className="btn-pr">
+          <IonButton onClick={deleteWallet} className="btn-pr" color="sbtn">
             DELETE ANYWAY
           </IonButton>
         </div>
