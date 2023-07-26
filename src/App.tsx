@@ -36,7 +36,6 @@ import "./theme/variables.css";
 import { wallet, settingsSharp } from "ionicons/icons";
 import WalletDetailPage from "./pages/WalletDetailPage";
 import WalletRemovePage from "./pages/WalletRemovePage";
-import Languages from "./pages/Languages";
 import SettingsPage from "./pages/SettingsPage";
 
 setupIonicReact();
@@ -63,9 +62,6 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/new-wallet">
               <NewWallet />
-            </Route>
-            <Route exact path="/languages">
-              <Languages />
             </Route>
             <Route exact path="/settings-page">
               <SettingsPage />
