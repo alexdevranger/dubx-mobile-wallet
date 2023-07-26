@@ -38,54 +38,59 @@ const Menu = () => {
     <IonMenu side="end" contentId="main">
       <IonHeader>
         <IonToolbar color="light">
-          <IonTitle>MENU</IonTitle>
+          <IonTitle>{t("MENU")}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <IonList>
           <IonMenuToggle auto-hide="false">
             <IonItem button routerLink={"/wallets"} routerDirection="none">
-              <IonLabel>Wallets</IonLabel>
+              <IonLabel>{t("Wallets")}</IonLabel>
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle auto-hide="false">
-            {/* <IonItem button routerLink={"/languages"} routerDirection="none">
-              <IonLabel>Languages</IonLabel>
-            </IonItem> */}
             <IonItem
               button
               routerLink={"/settings-page"}
               routerDirection="none"
             >
-              <IonLabel>Settings</IonLabel>
+              <IonLabel>{t("Settings")}</IonLabel>
             </IonItem>
           </IonMenuToggle>
         </IonList>
         <div className="submenuHolder">
           <IonText color="primary" className="mb20">
             <div className="label-text-wrapper sc-ion-input-md">
-              <div className="label-text sc-ion-input-md">
-                {t("Current language: ")}
+              <div
+                className="label-text sc-ion-input-md"
+                style={{ fontSize: "13px" }}
+              >
+                {t("Current Language: ")}
               </div>
             </div>
             <IonButton
               color="primary"
               fill="outline"
-              className="mb ml15 uppercase"
+              className="mb uppercase"
+              style={{ fontSize: "13px", marginLeft: "6px" }}
             >
               {currentLanguage}
             </IonButton>
           </IonText>
           <IonText color="primary" className="mb20">
             <div className="label-text-wrapper sc-ion-input-md">
-              <div className="label-text sc-ion-input-md">
-                {t("Current network: ")}
+              <div
+                className="label-text sc-ion-input-md"
+                style={{ fontSize: "13px" }}
+              >
+                {t("Current Network: ")}
               </div>
             </div>
             <IonButton
               color="primary"
               fill="outline"
               className="mb ml15 uppercase"
+              style={{ fontSize: "13px", marginLeft: "6px" }}
             >
               {currentNetwork}
             </IonButton>

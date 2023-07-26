@@ -8,7 +8,6 @@ import {
   IonTabBar,
   IonIcon,
   IonLabel,
-  IonSplitPane,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { useTranslation } from "react-i18next";
@@ -34,11 +33,10 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import { wallet, star, settingsSharp } from "ionicons/icons";
+import { wallet, settingsSharp } from "ionicons/icons";
 import WalletDetailPage from "./pages/WalletDetailPage";
 import WalletRemovePage from "./pages/WalletRemovePage";
 import Languages from "./pages/Languages";
-import Settings from "./pages/Settings";
 import SettingsPage from "./pages/SettingsPage";
 
 setupIonicReact();
@@ -69,9 +67,6 @@ const App: React.FC = () => {
             <Route exact path="/languages">
               <Languages />
             </Route>
-            {/* <Route exact path="/settings">
-              <Settings />
-            </Route> */}
             <Route exact path="/settings-page">
               <SettingsPage />
             </Route>
@@ -81,10 +76,6 @@ const App: React.FC = () => {
               <IonIcon icon={wallet} style={{ color: "white" }} />
               <IonLabel style={{ color: "#3ce0f5" }}>{t("Wallets")}</IonLabel>
             </IonTabButton>
-            {/* <IonTabButton tab="languages" href="/languages">
-              <IonIcon icon={star} style={{ color: "white" }} />
-              <IonLabel style={{ color: "#3ce0f5" }}>{t("Languages")}</IonLabel>
-            </IonTabButton> */}
             <IonTabButton tab="settings" href="/settings-page">
               <IonIcon icon={settingsSharp} style={{ color: "white" }} />
               <IonLabel style={{ color: "#3ce0f5" }}>{t("Settings")}</IonLabel>

@@ -1,6 +1,5 @@
 import { ethers } from "ethers";
 
-// const savedProvider = localStorage.getItem("provider");
 export const createProvider = (network: "testnet" | "mainnet") => {
   const providerUrl =
     network === "testnet"
@@ -27,3 +26,8 @@ export const getBalance = async (
   const balance: any = await provider.getBalance(addr);
   return ethers.utils.formatEther(balance);
 };
+
+export const shortenAddress = (address: string) =>
+  `${address.slice(0, 12)}...${address.slice(address.length - 12)}`;
+export const shortenTxHash = (address: string) =>
+  `${address.slice(0, 4)}..${address.slice(address.length - 4)}`;

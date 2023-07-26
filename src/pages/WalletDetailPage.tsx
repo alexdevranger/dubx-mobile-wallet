@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import {
   IonLabel,
   IonContent,
@@ -14,22 +14,24 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  InputChangeEventDetail,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ModalQRCode from "../components/ModalQRCode";
+import ModalTXHistory from "../components/ModalTXHistory";
 import { useTranslation } from "react-i18next";
 import { ethers } from "ethers";
 import { getBalance, createProvider, getTx } from "../utils/helper";
 import { Clipboard } from "@capacitor/clipboard";
 import {
-  star,
   arrowBackCircleOutline,
   openOutline,
   arrowRedoOutline,
   trash,
   qrCodeOutline,
+  reloadCircleSharp,
+  colorFilter,
+  documents,
 } from "ionicons/icons";
 
 import "./WalletDetailPage.css";
@@ -53,7 +55,7 @@ const WalletDetailPage: React.FC = () => {
   const [minedTx, setMinedTx] = useState(false);
   const [hash, setHash] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showLoading, setShowLoading] = useState(false);
+  const [isModalTXOpen, setIsModalTXOpen] = useState(false);
   const [showTxInfo, setShowTxInfo] = useState(false);
   const [waiting, setWaiting] = useState(false);
 
@@ -90,8 +92,8 @@ const WalletDetailPage: React.FC = () => {
       setCurrentNetwork(savedNetwork);
     };
     getAddrBalance(address);
-  }, [location]);
-  //console.log("balance111", balance);
+  }, [location, minedTx, address, currentNetwork]);
+  //console.log("balance", balance);
   const walletsFromLocalStorage = JSON.parse(
     localStorage.getItem("wallets") || "[]"
   );
@@ -101,10 +103,10 @@ const WalletDetailPage: React.FC = () => {
   );
 
   const { name, privateKey } = matchedWallet || {};
-  const copyPrivateKey = async () => {
+  const copyPrivateKey = async (element: string) => {
     try {
       await Clipboard.write({
-        string: privateKey,
+        string: element,
       });
       setShowToast(true);
     } catch (error) {
@@ -128,6 +130,7 @@ const WalletDetailPage: React.FC = () => {
   const sendDubx = async () => {
     try {
       const savedNetwork: any = localStorage.getItem("provider") || "testnet";
+
       const provider = await createProvider(savedNetwork);
       const signer = new ethers.Wallet(privateKey, provider);
 
@@ -169,17 +172,40 @@ const WalletDetailPage: React.FC = () => {
 
         const signedTransaction = await signer.sendTransaction(transaction);
         console.log("Transaction sent:", signedTransaction);
+        if (savedNetwork === "testnet") {
+          const savedTestnetTransactions: any =
+            (await JSON.parse(localStorage.getItem("testnetTransactions"))) ||
+            [];
+          console.log("savedTestnetTransactions", savedTestnetTransactions);
+          const txlength = savedTestnetTransactions.length;
+          console.log("txlength", txlength);
+          if (txlength === 5) {
+            console.log("===5");
+            await savedTestnetTransactions.shift();
+            await savedTestnetTransactions.push(signedTransaction.hash);
+            await localStorage.setItem(
+              "testnetTransactions",
+              JSON.stringify(savedTestnetTransactions)
+            );
+          } else {
+            console.log("<5");
+            await savedTestnetTransactions.push(signedTransaction.hash);
+            await localStorage.setItem(
+              "testnetTransactions",
+              JSON.stringify(savedTestnetTransactions)
+            );
+          }
+          console.log("savedTestnetTransactions", savedTestnetTransactions);
+        }
 
         setWaiting(false);
         setPendingTx(true);
-        setShowLoading(true);
         setMinedTx(false);
 
         const receipt = await signedTransaction.wait();
         console.log("receipt", receipt);
 
         setPendingTx(false);
-        setShowLoading(false);
         setMinedTx(true);
         const txnsInfo = await getTxsInfo(receipt.transactionHash);
         console.log(txnsInfo);
@@ -201,6 +227,9 @@ const WalletDetailPage: React.FC = () => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
+  };
+  const handleOpenTXModal = () => {
+    setIsModalTXOpen(true);
   };
   const toggleDivInfo = () => {
     setShowTxInfo((prevState) => !prevState);
@@ -229,7 +258,6 @@ const WalletDetailPage: React.FC = () => {
 
     setError("");
     setPendingTx(false);
-    setMinedTx(false);
     setMinedTx(false);
     setHash("");
     setShowTxInfo(false);
@@ -260,7 +288,7 @@ const WalletDetailPage: React.FC = () => {
           </IonButton>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
+      <IonContent fullscreen className="ion-content ion-padding">
         <IonGrid className="ion-text-center ion-grid">
           <IonRow className="ion-row">
             <IonCol size="12" className="logo-text">
@@ -277,10 +305,6 @@ const WalletDetailPage: React.FC = () => {
         </IonGrid>
 
         <div className="page-container">
-          {/* <div className="image-container">
-            <img className="" src="ukras.webp" alt="Detail" />
-          </div> */}
-
           <IonLabel>
             <div className="detail-holder">
               <IonText color="danger">
@@ -321,23 +345,6 @@ const WalletDetailPage: React.FC = () => {
                   <p>{parseFloat(balance).toFixed(4)}</p>
                 </IonText>
               </div>
-              <div className="btn-qr">
-                <IonButton
-                  onClick={handleOpenModal}
-                  color="danger"
-                  slot="end"
-                  className="btn-qr"
-                >
-                  {t("share")}
-                  <br /> {t("qr code")}
-                  <IonIcon
-                    slot="end"
-                    icon={qrCodeOutline}
-                    size="large"
-                    color="dark"
-                  ></IonIcon>
-                </IonButton>
-              </div>
             </div>
             <div className="detail-holder" style={{ marginTop: "20px" }}>
               <IonText color="danger">
@@ -367,7 +374,11 @@ const WalletDetailPage: React.FC = () => {
             >
               {showPrivateKey ? t("Hide") : t("Show")}
             </IonButton>
-            <IonButton className="btn-pr" onClick={copyPrivateKey} color="sbtn">
+            <IonButton
+              className="btn-pr"
+              onClick={() => copyPrivateKey(privateKey)}
+              color="sbtn"
+            >
               {t("Copy Private Key")}
             </IonButton>
           </div>
@@ -384,9 +395,6 @@ const WalletDetailPage: React.FC = () => {
               icon={openOutline}
               style={{ paddingLeft: "7px" }}
             ></IonIcon>
-            <button className="clearall" id="btn-reset" onClick={clearAll}>
-              Clear
-            </button>
           </h2>
           <div
             className={`sendHolder item-card ${
@@ -425,7 +433,6 @@ const WalletDetailPage: React.FC = () => {
                 style={{ marginTop: "20px" }}
                 expand="block"
                 shape="round"
-                // fill="outline"
                 color="danger"
                 onClick={sendDubx}
               >
@@ -491,13 +498,20 @@ const WalletDetailPage: React.FC = () => {
                           maxWidth: "75px",
                         }}
                       >
-                        TxHash:
+                        {t("TxHash:")}
                       </span>
 
                       <span
                         style={{ wordBreak: "break-all", marginLeft: "7px" }}
+                        className="fs14"
                       >
                         {hash}{" "}
+                        <IonIcon
+                          slot="end"
+                          icon={documents}
+                          style={{ marginLeft: "10px" }}
+                          onClick={() => copyPrivateKey(hash)}
+                        ></IonIcon>
                       </span>
                     </p>
                     <p
@@ -514,7 +528,7 @@ const WalletDetailPage: React.FC = () => {
                           maxWidth: "75px",
                         }}
                       >
-                        Network:
+                        {t("Network")}:
                       </span>{" "}
                       <span
                         style={{ wordBreak: "break-all", marginLeft: "7px" }}
@@ -536,7 +550,7 @@ const WalletDetailPage: React.FC = () => {
                           maxWidth: "75px",
                         }}
                       >
-                        From:{" "}
+                        {t("From:")}
                       </span>{" "}
                       <span
                         style={{ wordBreak: "break-all", marginLeft: "7px" }}
@@ -558,7 +572,7 @@ const WalletDetailPage: React.FC = () => {
                           maxWidth: "75px",
                         }}
                       >
-                        To:{" "}
+                        {t("To:")}
                       </span>{" "}
                       <span
                         style={{ wordBreak: "break-all", marginLeft: "7px" }}
@@ -580,7 +594,7 @@ const WalletDetailPage: React.FC = () => {
                           maxWidth: "75px",
                         }}
                       >
-                        Amount:{" "}
+                        {t("Amount:")}
                       </span>{" "}
                       <span
                         style={{
@@ -598,46 +612,93 @@ const WalletDetailPage: React.FC = () => {
               )}
             </div>
           )}
-          <div className="mt40">
-            <IonButton
-              onClick={removeWalletClick}
-              color="danger"
-              slot="end"
-              className="btn-remove"
-            >
-              {i18n.language === "de" ? (
-                <>
-                  {t("wallet")}
-                  <br />
-                  {t("remove")}
-                </>
-              ) : (
-                <>
-                  {t("remove")}
-                  <br />
-                  {t("wallet")}
-                </>
-              )}
-              <IonIcon
-                slot="end"
-                icon={trash}
-                size="large"
-                color="dark"
-              ></IonIcon>
-            </IonButton>
-          </div>
+
           <ModalQRCode
             isOpen={isModalOpen}
             address={address}
             onDidDismiss={() => setIsModalOpen(false)}
           />
+          <ModalTXHistory
+            isOpen={isModalTXOpen}
+            address={address}
+            onDidDismiss={() => setIsModalTXOpen(false)}
+          />
           <IonToast
             isOpen={showToast}
-            message="Copied"
+            message={t("Copied")}
             duration={2000}
             cssClass="custom-toast"
             onDidDismiss={() => setShowToast(false)}
           />
+        </div>
+        <div className="btnsHolder mt40">
+          <button className="detail" onClick={handleOpenModal}>
+            <IonIcon
+              icon={qrCodeOutline}
+              color="dark"
+              style={{ fontSize: "20px" }}
+            ></IonIcon>
+            <p
+              className="sc-ion-label-md-h sc-ion-label-md-s md btnsp"
+              style={{ color: "#fff" }}
+            >
+              {t("Share")}
+              <br /> {t("QR Code")}
+            </p>
+          </button>
+          <button className="detail" onClick={handleOpenTXModal}>
+            <IonIcon
+              icon={colorFilter}
+              color="dark"
+              style={{ fontSize: "20px" }}
+            ></IonIcon>
+            <p
+              className="sc-ion-label-md-h sc-ion-label-md-s md btnsp"
+              style={{ color: "#fff" }}
+            >
+              {t("TX")}
+              <br /> {t("History")}
+            </p>
+          </button>
+          <button className="detail" onClick={clearAll}>
+            <IonIcon
+              icon={reloadCircleSharp}
+              color="dark"
+              style={{ fontSize: "20px" }}
+            ></IonIcon>
+            <p
+              className="sc-ion-label-md-h sc-ion-label-md-s md btnsp"
+              style={{ color: "#fff" }}
+            >
+              {t("Clear")}
+              <br /> {t("Form")}
+            </p>
+          </button>
+          <button className="detail" onClick={removeWalletClick}>
+            <IonIcon
+              icon={trash}
+              color="dark"
+              style={{ fontSize: "20px" }}
+            ></IonIcon>
+            <p
+              className="sc-ion-label-md-h sc-ion-label-md-s md btnsp"
+              style={{ color: "#fff" }}
+            >
+              {i18n.language === "de" ? (
+                <>
+                  {t("Wallet")}
+                  <br />
+                  {t("Remove")}
+                </>
+              ) : (
+                <>
+                  {t("Remove")}
+                  <br />
+                  {t("Wallet")}
+                </>
+              )}
+            </p>
+          </button>
         </div>
       </IonContent>
     </IonPage>

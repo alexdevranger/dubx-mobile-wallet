@@ -47,6 +47,9 @@ const Home: React.FC = () => {
   const handleItemClick = (addr: string) => {
     history.push(`/wallets/${addr}`);
   };
+  const openNewWallet = () => {
+    history.push(`/new-wallet`);
+  };
   useEffect(() => {
     const getLanguageFromStorage = localStorage.getItem("language") || "";
     if (getLanguageFromStorage) {
@@ -74,17 +77,17 @@ const Home: React.FC = () => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className="ion-content">
+      <IonContent fullscreen className="ion-content  ion-padding">
         <IonGrid className="ion-text-center ion-grid">
           <IonRow className="ion-row">
             <IonCol size="12" className="logo-text">
               <IonText color="primary">
                 <h1 className="titleGradient">{t("DUBX_WALLETS")}</h1>
                 <p className="subtitleP">
-                  {t("Click icon")}{" "}
-                  <span className="addButtonText iconImport">
-                    <IonIcon icon={add} />
-                  </span>{" "}
+                  {t("Click ")}{" "}
+                  <span className="plus" onClick={openNewWallet}>
+                    +
+                  </span>
                   {t("to import wallet")}
                 </p>
               </IonText>

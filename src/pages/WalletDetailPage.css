@@ -201,3 +201,25 @@ hr.hr {
   color: #fff;
   border: 1px solid #838383;
 }
+.detail {
+  background-color: #8b50c7;
+  border: 1px solid #8b50c7;
+  padding: 5px;
+  border-radius: 6px;
+  width: 60px;
+}
+.btnsp {
+  color: rgb(255, 255, 255);
+  font-size: 10px;
+  margin: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btnsHolder {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+}

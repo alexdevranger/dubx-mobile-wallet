@@ -92,7 +92,7 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
                 className="titleGradient"
                 style={{ textTransform: "uppercase", marginBottom: "50px" }}
               >
-                {t("Create new wallet")}
+                {t("CREATE NEW WALLET")}
               </h1>
             </IonText>
             <IonInput

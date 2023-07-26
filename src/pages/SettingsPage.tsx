@@ -15,7 +15,6 @@ import {
   IonCol,
   IonText,
   IonItem,
-  IonList,
 } from "@ionic/react";
 import { arrowBackCircleOutline } from "ionicons/icons";
 import { useTranslation } from "react-i18next";
@@ -205,30 +204,6 @@ const SettingsPage: React.FC = () => {
               </IonCol>
             </IonRow>
           </IonGrid>
-          {/* <IonList>
-            <IonItem>
-              <div className="ion-text-center flex-lang">
-                <IonButton
-                  color={lang.language === "en" ? "primary" : "medium"}
-                  fill="outline"
-                  className="mb"
-                  expand="block"
-                  onClick={() => handleChangeLanguage("en")}
-                >
-                  EN
-                </IonButton>
-                <IonButton
-                  color={lang.language === "es" ? "primary" : "medium"}
-                  fill="outline"
-                  expand="block"
-                  className="mb"
-                  onClick={() => handleChangeLanguage("es")}
-                >
-                  ES
-                </IonButton>
-              </div>
-            </IonItem>
-          </IonList> */}
         </div>
       </IonContent>
     </IonPage>

@@ -99,9 +99,6 @@ const WalletRemovePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        {/* <div className="image-container">
-          <img className="" src="ukras.webp" alt="Detail" />
-        </div> */}
         <IonGrid className="ion-text-center ion-grid">
           <IonRow className="ion-row">
             <IonCol size="12" className="logo-text">
@@ -121,7 +118,7 @@ const WalletRemovePage: React.FC = () => {
           <div className="detail-holder">
             <IonText color="danger">
               <div className="label-text-wrapper sc-ion-input-md">
-                <div className="label-text sc-ion-input-md">Name</div>
+                <div className="label-text sc-ion-input-md">{t("Name")}</div>
               </div>
             </IonText>
           </div>
@@ -131,7 +128,7 @@ const WalletRemovePage: React.FC = () => {
           <div className="detail-holder">
             <IonText color="danger">
               <div className="label-text-wrapper sc-ion-input-md">
-                <div className="label-text sc-ion-input-md">Address</div>
+                <div className="label-text sc-ion-input-md">{t("Address")}</div>
               </div>
             </IonText>
           </div>
@@ -160,13 +157,15 @@ const WalletRemovePage: React.FC = () => {
           <IonText color="primary" className="warning-grey">
             <div className="label-text-wrapper">
               <div className="label-text">
-                Are you sure you want to delete your wallet? Please ensure that
-                you have saved your PRIVATE KEY.
+                {t(
+                  "If you want to delete your wallet, please be sure that you have saved your PRIVATE KEY."
+                )}
               </div>
               <br />
               <div className="label-text">
-                Remember, deleting your wallet can result in permanent loss of
-                access to your funds !!!
+                {t(
+                  "Remember, deleting your wallet can result in permanent loss of access to your funds !!!"
+                )}
               </div>
             </div>
           </IonText>
@@ -174,16 +173,16 @@ const WalletRemovePage: React.FC = () => {
 
         <div className="btn-holder mt40">
           <IonButton className="btn-pr" color="sbtn" onClick={copyPrivateKey}>
-            Copy Private Key
+            {t("Copy Private Key")}
           </IonButton>
           <IonButton onClick={deleteWallet} className="btn-pr" color="sbtn">
-            DELETE ANYWAY
+            {t("DELETE ANYWAY")}
           </IonButton>
         </div>
         {error && <p className="error-message">{error}</p>}
         <IonToast
           isOpen={showToast}
-          message="Copied"
+          message={t("Copied")}
           duration={2000}
           cssClass="custom-toast"
           onDidDismiss={() => setShowToast(false)}

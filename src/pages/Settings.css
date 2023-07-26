@@ -14,8 +14,8 @@
   margin: 4px;
 }
 .custom-button {
-  --border-width: 1px; /* Adjust the border width as needed */
-  --border-color: #ccc; /* Adjust the border color as needed */
+  --border-width: 1px;
+  --border-color: #ccc;
   border-width: var(--border-width);
   border-color: var(--border-color);
   border-style: solid;
