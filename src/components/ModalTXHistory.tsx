@@ -149,7 +149,11 @@ const ModalTXHistory: React.FC<ModalProps> = ({
           >
             {t("Back")}
           </IonButton>
-          <IonTitle>{t("TX History")}</IonTitle>
+          <IonTitle>
+            {t("TX ")}
+            {""}
+            {t("History")}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
@@ -164,7 +168,7 @@ const ModalTXHistory: React.FC<ModalProps> = ({
                   {t("Latest Transactions")}
                 </h1>
                 <p className="subtitleP">
-                  {t("Network: ")}
+                  {t("Network")}:{" "}
                   <span
                     style={{
                       color: "white",

@@ -58,6 +58,7 @@ const WalletDetailPage: React.FC = () => {
   const [isModalTXOpen, setIsModalTXOpen] = useState(false);
   const [showTxInfo, setShowTxInfo] = useState(false);
   const [waiting, setWaiting] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const [txObject, setTxObject] = useState({
     network: "",
@@ -93,6 +94,38 @@ const WalletDetailPage: React.FC = () => {
     };
     getAddrBalance(address);
   }, [location, minedTx, address, currentNetwork]);
+  useEffect(() => {
+    const clearAll = () => {
+      const addressToInput = document.getElementById(
+        "addressTo"
+      ) as HTMLInputElement;
+      const amountInput = document.getElementById("amount") as HTMLInputElement;
+      addressToInput.focus();
+
+      if (addressToInput) {
+        addressToInput.value = "";
+      }
+
+      if (amountInput) {
+        amountInput.value = "";
+      }
+
+      setError("");
+      setPendingTx(false);
+      setMinedTx(false);
+      setHash("");
+      setShowTxInfo(false);
+      setWaiting(false);
+      setTxObject({
+        network: "",
+        from: "",
+        to: "",
+        amount: "",
+      });
+    };
+
+    clearAll();
+  }, [location, address, currentNetwork]);
   //console.log("balance", balance);
   const walletsFromLocalStorage = JSON.parse(
     localStorage.getItem("wallets") || "[]"
@@ -103,7 +136,7 @@ const WalletDetailPage: React.FC = () => {
   );
 
   const { name, privateKey } = matchedWallet || {};
-  const copyPrivateKey = async (element: string) => {
+  const copyString = async (element: string) => {
     try {
       await Clipboard.write({
         string: element,
@@ -169,6 +202,7 @@ const WalletDetailPage: React.FC = () => {
           value: ethers.utils.parseEther(`${amountDubx}`),
         };
         setWaiting(true);
+        setIsDisabled(true);
 
         const signedTransaction = await signer.sendTransaction(transaction);
         console.log("Transaction sent:", signedTransaction);
@@ -212,7 +246,7 @@ const WalletDetailPage: React.FC = () => {
         setTxObject(txnsInfo);
         setIsSendHolderVisible(false);
         setHash(receipt.transactionHash);
-
+        setIsDisabled(false);
         console.log("Transaction mined - Hash:", receipt.transactionHash);
       }
     } catch (error) {
@@ -270,6 +304,7 @@ const WalletDetailPage: React.FC = () => {
     });
   };
   //console.log(i18n.language);
+  console.log("isDisabled", isDisabled);
 
   return (
     <IonPage dir={i18n.language === "ar" ? "rtl" : "ltr"}>
@@ -328,7 +363,15 @@ const WalletDetailPage: React.FC = () => {
               </IonText>
             </div>
             <IonText color="dark">
-              <p>{address}</p>
+              <p>
+                {address}
+                <IonIcon
+                  slot="end"
+                  icon={documents}
+                  style={{ marginLeft: "10px" }}
+                  onClick={() => copyString(address)}
+                ></IonIcon>
+              </p>
             </IonText>
             <div className="flex-qr">
               <div className="balanceHolder">
@@ -376,7 +419,7 @@ const WalletDetailPage: React.FC = () => {
             </IonButton>
             <IonButton
               className="btn-pr"
-              onClick={() => copyPrivateKey(privateKey)}
+              onClick={() => copyString(privateKey)}
               color="sbtn"
             >
               {t("Copy Private Key")}
@@ -435,6 +478,7 @@ const WalletDetailPage: React.FC = () => {
                 shape="round"
                 color="danger"
                 onClick={sendDubx}
+                disabled={isDisabled}
               >
                 {t("Send")}
               </IonButton>
@@ -498,7 +542,7 @@ const WalletDetailPage: React.FC = () => {
                           maxWidth: "75px",
                         }}
                       >
-                        {t("TxHash:")}
+                        {t("TxHash")}:
                       </span>
 
                       <span
@@ -510,7 +554,7 @@ const WalletDetailPage: React.FC = () => {
                           slot="end"
                           icon={documents}
                           style={{ marginLeft: "10px" }}
-                          onClick={() => copyPrivateKey(hash)}
+                          onClick={() => copyString(hash)}
                         ></IonIcon>
                       </span>
                     </p>
@@ -550,7 +594,7 @@ const WalletDetailPage: React.FC = () => {
                           maxWidth: "75px",
                         }}
                       >
-                        {t("From:")}
+                        {t("From")}:
                       </span>{" "}
                       <span
                         style={{ wordBreak: "break-all", marginLeft: "7px" }}
@@ -572,7 +616,7 @@ const WalletDetailPage: React.FC = () => {
                           maxWidth: "75px",
                         }}
                       >
-                        {t("To:")}
+                        {t("To")}:
                       </span>{" "}
                       <span
                         style={{ wordBreak: "break-all", marginLeft: "7px" }}
@@ -594,7 +638,7 @@ const WalletDetailPage: React.FC = () => {
                           maxWidth: "75px",
                         }}
                       >
-                        {t("Amount:")}
+                        {t("Amount")}:
                       </span>{" "}
                       <span
                         style={{

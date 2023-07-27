@@ -100,7 +100,7 @@ const ModalQRCode: React.FC<ModalProps> = ({
 
         <div className="btn-holder">
           <IonButton onClick={copyAddress} className="btn-pr" color="sbtn">
-            Copy Address
+            {t("Copy Address")}
           </IonButton>
           {/* <IonButton className="btn-pr" color="sbtn" onClick={saveAsImage}>
             {t("Save as Image")}

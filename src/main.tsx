@@ -9,6 +9,7 @@ import global_de from "./translations/de/global.json";
 import global_ru from "./translations/ru/global.json";
 import global_pl from "./translations/pl/global.json";
 import global_sk from "./translations/sk/global.json";
+import global_sr from "./translations/sr/global.json";
 import i18next from "i18next";
 import { I18nextProvider } from "react-i18next";
 
@@ -36,6 +37,9 @@ i18next.init({
     },
     sk: {
       global: global_sk,
+    },
+    sr: {
+      global: global_sr,
     },
   },
 });

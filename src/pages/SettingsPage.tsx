@@ -202,6 +202,17 @@ const SettingsPage: React.FC = () => {
                   SK
                 </IonButton>
               </IonCol>
+              <IonCol size="6">
+                <IonButton
+                  color={lang.language === "sr" ? "primary" : "medium"}
+                  fill="outline"
+                  expand="full"
+                  className="mb custom-button"
+                  onClick={() => handleChangeLanguage("sr")}
+                >
+                  SR
+                </IonButton>
+              </IonCol>
             </IonRow>
           </IonGrid>
         </div>
