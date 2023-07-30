@@ -87,6 +87,17 @@ const ModalImportFromPrivate: React.FC<ModalProps> = ({
       setError("Private key is not correct");
       throw Error("Please enter a correct private key");
     }
+    const walletsFromLocalstorage = await JSON.parse(
+      localStorage.getItem("wallets") || "[]"
+    );
+    const isNameExists = walletsFromLocalstorage.some(
+      (walletItem: any) => walletItem.name === newWallName
+    );
+
+    if (isNameExists) {
+      setError("Wallet name already exists. Please choose a different name.");
+      return;
+    }
     try {
       await importWalletFromPrivateKey(newPrivKey, newWallName);
       onDidDismiss();

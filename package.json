@@ -1,5 +1,5 @@
 {
-  "name": "wallet",
+  "name": "dubxwallet",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -19,6 +19,7 @@
     "@capacitor/haptics": "5.0.5",
     "@capacitor/ios": "5.1.0",
     "@capacitor/keyboard": "5.0.5",
+    "@capacitor/splash-screen": "^5.0.6",
     "@capacitor/status-bar": "5.0.5",
     "@ionic-native/core": "^5.36.0",
     "@ionic/react": "^7.0.0",
@@ -39,6 +40,7 @@
     "react-router-dom": "^5.3.4"
   },
   "devDependencies": {
+    "@capacitor/assets": "^2.0.4",
     "@capacitor/cli": "5.1.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",

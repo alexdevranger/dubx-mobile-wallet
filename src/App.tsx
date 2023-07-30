@@ -11,6 +11,8 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
+
 import Home from "./pages/Wallets";
 import NewWallet from "./pages/NewWallet";
 import Menu from "./components/Menu";
@@ -42,6 +44,7 @@ setupIonicReact();
 
 const App: React.FC = () => {
   const [t, i18n] = useTranslation("global");
+  const history = useHistory();
   return (
     <IonApp>
       <IonReactRouter>
@@ -68,7 +71,7 @@ const App: React.FC = () => {
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
-            <IonTabButton tab="home" href="/wallets">
+            <IonTabButton tab="home" href="/">
               <IonIcon icon={wallet} style={{ color: "white" }} />
               <IonLabel style={{ color: "#3ce0f5" }}>{t("Wallets")}</IonLabel>
             </IonTabButton>

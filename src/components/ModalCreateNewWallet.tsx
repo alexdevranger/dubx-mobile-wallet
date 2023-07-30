@@ -26,34 +26,62 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
   const history = useHistory();
   const [error, setError] = useState<string | null>(null);
   const [t, i18n] = useTranslation("global");
+  const [isConfirming, setIsConfirming] = useState(false);
 
   useEffect(() => {
     setError(null);
   }, [isOpen]);
 
   const createRandomWallet = async (name: string) => {
-    const wallet = await ethers.Wallet.createRandom();
-    if (
-      wallet &&
-      ethers.utils.isAddress(wallet.address) &&
-      /^([A-Fa-f0-9]{64})$/.test(wallet.privateKey.substring(2, 66))
-    ) {
-      const newWall = {
-        name: name,
-        address: wallet.address,
-        privateKey: wallet.privateKey.substring(2, 66),
-        password: "",
-      };
-      const walletsFromLocalstorage = await JSON.parse(
-        localStorage.getItem("wallets") || "[]"
-      );
-      await walletsFromLocalstorage.push(newWall);
-      localStorage.setItem("wallets", JSON.stringify(walletsFromLocalstorage));
-    } else {
-      console.log("Invalid wallet address or private key");
+    setIsConfirming(true);
+
+    try {
+      const wallet = await ethers.Wallet.createRandom();
+      if (
+        wallet &&
+        ethers.utils.isAddress(wallet.address) &&
+        /^([A-Fa-f0-9]{64})$/.test(wallet.privateKey.substring(2, 66))
+      ) {
+        const walletsFromLocalstorage = await JSON.parse(
+          localStorage.getItem("wallets") || "[]"
+        );
+        // const isNameExists = walletsFromLocalstorage.some(
+        //   (walletItem: any) => walletItem.name === name
+        // );
+
+        // if (isNameExists) {
+        //   setError(
+        //     "Wallet name already exists. Please choose a different name."
+        //   );
+        //   setIsConfirming(false);
+        //   return;
+        // }
+
+        const newWall = {
+          name: name,
+          address: wallet.address,
+          privateKey: wallet.privateKey.substring(2, 66),
+          password: "",
+        };
+        await walletsFromLocalstorage.push(newWall);
+        localStorage.setItem(
+          "wallets",
+          JSON.stringify(walletsFromLocalstorage)
+        );
+      } else {
+        console.log("Invalid wallet address or private key");
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      setIsConfirming(false);
+    } catch (err) {
+      console.log(err);
+      setIsConfirming(false); // Make sure to set isConfirming back to false even in case of errors
     }
   };
   const importAndBack = async (event: any) => {
+    if (isConfirming) return;
     const newWallName: string = (
       document.getElementById("newNameFromPrivate") as HTMLInputElement
     ).value!.trim();
@@ -61,14 +89,26 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
       setError("Please enter some name for your wallet.");
       throw Error("Please enter a name for wallet");
     }
+    const walletsFromLocalstorage = await JSON.parse(
+      localStorage.getItem("wallets") || "[]"
+    );
+    const isNameExists = walletsFromLocalstorage.some(
+      (walletItem: any) => walletItem.name === newWallName
+    );
+
+    if (isNameExists) {
+      setError("Wallet name already exists. Please choose a different name.");
+      return;
+    }
     try {
       await createRandomWallet(newWallName);
       onDidDismiss();
-      history.push("/wallets");
+      history.push("/");
     } catch (err) {
       console.log(err);
     }
   };
+  console.log(isConfirming);
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onDidDismiss}>
       <IonHeader>
@@ -107,8 +147,9 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
               className="btnImp"
               expand="block"
               onClick={importAndBack}
+              disabled={isConfirming}
             >
-              {t("Confirm")}
+              {isConfirming ? t("Creating") : t("Confirm")}
             </IonButton>
           </div>
         </div>

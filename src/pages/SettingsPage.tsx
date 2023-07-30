@@ -18,6 +18,7 @@ import {
 } from "@ionic/react";
 import { arrowBackCircleOutline } from "ionicons/icons";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 import "./Settings.css";
 
 interface LangStorage {
@@ -29,6 +30,7 @@ const SettingsPage: React.FC = () => {
   const [provider, setProvider] = useState<string>(
     localStorage.getItem("provider") || "testnet"
   );
+  const history = useHistory();
   const [lang, setLang] = useState<LangStorage>({ language: "en" });
 
   const handleProviderChange = (event: CustomEvent) => {
@@ -72,8 +74,7 @@ const SettingsPage: React.FC = () => {
         <IonToolbar>
           <IonTitle>{t("Settings")}</IonTitle>
           <IonButton
-            routerLink="/wallets"
-            routerDirection="back"
+            onClick={() => history.goBack()}
             color="danger"
             slot="end"
             style={{ marginRight: "16px" }}

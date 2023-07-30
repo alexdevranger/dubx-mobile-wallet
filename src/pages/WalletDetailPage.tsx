@@ -304,7 +304,7 @@ const WalletDetailPage: React.FC = () => {
     });
   };
   //console.log(i18n.language);
-  console.log("isDisabled", isDisabled);
+  //console.log("isDisabled", isDisabled);
 
   return (
     <IonPage dir={i18n.language === "ar" ? "rtl" : "ltr"}>
@@ -312,8 +312,7 @@ const WalletDetailPage: React.FC = () => {
         <IonToolbar>
           <IonTitle style={{ color: "#fff" }}>{name}</IonTitle>
           <IonButton
-            routerLink="/wallets"
-            routerDirection="back"
+            onClick={() => history.goBack()}
             color="danger"
             slot="end"
             style={{ marginRight: "16px" }}
@@ -675,7 +674,7 @@ const WalletDetailPage: React.FC = () => {
             onDidDismiss={() => setShowToast(false)}
           />
         </div>
-        <div className="btnsHolder mt40">
+        <div className="btnsHolder">
           <button className="detail" onClick={handleOpenModal}>
             <IonIcon
               icon={qrCodeOutline}

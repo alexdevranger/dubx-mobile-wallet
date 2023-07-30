@@ -3,7 +3,7 @@
   "Wallets": "Wallets",
   "DUBX_WALLETS": "DUBX WALLETS",
   "to import wallet": "to import wallet",
-  "Create new or": "Create new or",
+  "Create new or": "Create New or",
   "Import Existing": "Import Existing",
   "CREATE NEW WALLET": "CREATE NEW WALLET",
   "IMPORT WALLET FROM PRIVATE KEY": "IMPORT WALLET FROM PRIVATE KEY",
@@ -68,5 +68,6 @@
   "Refresh Transactions": "Refresh Transactions",
   "BlockNumber": "BlockNumber",
   "Time&Date": "Time&Date",
-  "Copy Address": "Copy Address"
+  "Copy Address": "Copy Address",
+  "Creating": "Creating"
 }

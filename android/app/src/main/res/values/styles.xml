@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
     <!-- Base application theme. -->
@@ -9,7 +9,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style
+    name="AppTheme.NoActionBar"
+    parent="Theme.AppCompat.DayNight.NoActionBar"
+  >
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:background">@null</item>
@@ -18,5 +21,16 @@
 
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
         <item name="android:background">@drawable/splash</item>
+         <!-- <item name="android:background">#4D4D4D</item> -->
+         <!-- kad se stavi ovako onda nema splash screena -->
+   
+     <!-- <item name="android:windowNoTitle">true</item> <item
+      name="android:windowActionBar"
+    >false</item> <item name="android:windowFullscreen">true</item> <item
+      name="android:windowContentOverlay"
+    >@null</item> <item name="android:windowIsTranslucent">true</item><item
+      name="android:background"
+    >@null</item> -->
+    <!-- kad se stavi ovako onda nema splash screena -->
     </style>
 </resources>

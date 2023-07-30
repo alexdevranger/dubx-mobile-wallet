@@ -103,6 +103,17 @@ const ModalImportFromKeystore: React.FC<ModalProps> = ({
       setError("Please enter some name for allet.");
       throw Error("Please enter a name for wallet");
     }
+    const walletsFromLocalstorage = await JSON.parse(
+      localStorage.getItem("wallets") || "[]"
+    );
+    const isNameExists = walletsFromLocalstorage.some(
+      (walletItem: any) => walletItem.name === newWallName
+    );
+
+    if (isNameExists) {
+      setError("Wallet name already exists. Please choose a different name.");
+      return;
+    }
     try {
       await importWalletFromKeystore(file, newPassword, newWallName);
       onDidDismiss();

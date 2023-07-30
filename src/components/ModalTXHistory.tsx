@@ -61,9 +61,9 @@ const ModalTXHistory: React.FC<ModalProps> = ({
       (await JSON.parse(localStorage.getItem("testnetTransactions"))) || [];
     if (testnetTxs.length > 0) {
       await Promise.all(
-        testnetTxs.map(async (txHash: any, index: number) => {
+        testnetTxs.map(async (txHash: any) => {
           const tx = await provider.getTransaction(txHash);
-          console.log("txxxxxxxxx", tx);
+          // console.log("txxxxxxxxx", tx);
           let { from, to, blockNumber, hash } = tx;
           let block = await provider.getBlock(blockNumber);
           let timestamp = block.timestamp;
@@ -80,7 +80,7 @@ const ModalTXHistory: React.FC<ModalProps> = ({
         })
       );
       testnetArrayObjects.sort((a, b) => b.timestamp - a.timestamp);
-      console.log(testnetArrayObjects);
+      //console.log(testnetArrayObjects);
       setTestnetTransactions(testnetArrayObjects);
     }
   };
@@ -91,7 +91,7 @@ const ModalTXHistory: React.FC<ModalProps> = ({
       const result = await fetch(url);
       const transactions = await result.json();
       setTxns(transactions);
-      console.log(transactions);
+      //console.log(transactions);
     } catch (error) {
       setTxns([]);
       console.error("Error fetching data:", error);
@@ -106,7 +106,7 @@ const ModalTXHistory: React.FC<ModalProps> = ({
     } else if (network === "testnet") {
       getTestnetTxns("testnet");
     }
-  }, [isOpen]);
+  }, [isOpen, network]);
 
   useEffect(() => {
     if (refreshing) {
@@ -117,8 +117,8 @@ const ModalTXHistory: React.FC<ModalProps> = ({
       }
       setRefreshing(false);
     }
-    console.log(testnetTransactions);
-  }, [refreshing]);
+    //console.log(testnetTransactions);
+  }, [refreshing, network]);
 
   const isMainnet = network === "mainnet";
   const isTestnet = network === "testnet";
