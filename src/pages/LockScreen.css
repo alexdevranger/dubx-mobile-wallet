@@ -1,0 +1,128 @@
+ion-button.pin {
+  width: 100%;
+  height: 80px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.lock-screen-row {
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.lock-screen-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lock-screen-circle {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #df7fef;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.lock-screen-circle-filled {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #df7fef;
+  border-radius: 50%;
+  background-color: #df7fef;
+  transition: background-color 0.2s ease;
+}
+
+.lock-screen-alert {
+  color: #df7fef;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  /* opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease; */
+  pointer-events: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.lock-screen-alert.show {
+  /* opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto; */
+  max-height: 100px; /* Set the desired maximum height to allow the content to expand */
+  margin: 20px; /* Add margin for better visual appearance */
+  padding: 10px; /* Add padding for better visual appearance */
+}
+.number-button {
+  width: 80px;
+  height: 80px;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: #ffffff;
+  border: 2px solid #df7fef;
+  border-radius: 50%;
+  color: #df7fef;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s;
+
+  /* Add hover effect */
+  &:hover {
+    background-color: #df7fef;
+    color: #ffffff;
+    transform: scale(1.1);
+  }
+}
+.pin-display {
+  width: 100%;
+  height: 60px;
+  font-size: 67px;
+  text-align: center;
+  border: 1px solid #454545;
+  border-radius: 8px;
+  background-color: #252424;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.pin-setup-row {
+  display: flex;
+  justify-content: center;
+}
+
+.confirm-button {
+  width: 100%;
+  height: 60px;
+  font-size: 24px;
+  border-radius: 8px;
+  background-color: #df7fef;
+  color: #fff;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+.skip {
+  /* position: absolute;
+  bottom: 20px; */
+  display: block;
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  margin-top: 40px;
+}

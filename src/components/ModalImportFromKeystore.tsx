@@ -30,6 +30,9 @@ const ModalImportFromKeystore: React.FC<ModalProps> = ({
   const [t, i18n] = useTranslation("global");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
+  const [importSuccess, setImportSuccess] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -46,41 +49,77 @@ const ModalImportFromKeystore: React.FC<ModalProps> = ({
     password: string,
     name: string
   ) => {
-    const reader = new FileReader();
-    const readFile = () =>
-      new Promise<string>((resolve, reject) => {
-        reader.onloadend = () => resolve(reader.result as string);
-        reader.onerror = reject;
-        reader.readAsText(keystoreFile);
-      });
-    const keystore = await readFile();
-    const parsedKeystore = JSON.parse(keystore);
-    const wallet = await ethers.Wallet.fromEncryptedJson(
-      JSON.stringify(parsedKeystore),
-      password
-    );
-    if (
-      wallet &&
-      ethers.utils.isAddress(wallet.address) &&
-      /^([A-Fa-f0-9]{64})$/.test(wallet.privateKey.substring(2, 66))
-    ) {
-      const newWall = {
-        name: name,
-        address: wallet.address,
-        privateKey: wallet.privateKey.substring(2, 66),
-        password: "",
-      };
-      const walletsFromLocalstorage = await JSON.parse(
-        localStorage.getItem("wallets") || "[]"
+    setIsConfirming(true);
+    try {
+      const reader = new FileReader();
+      const readFile = () =>
+        new Promise<string>((resolve, reject) => {
+          reader.onloadend = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsText(keystoreFile);
+        });
+      const keystore = await readFile();
+      const parsedKeystore = JSON.parse(keystore);
+      const wallet = await ethers.Wallet.fromEncryptedJson(
+        JSON.stringify(parsedKeystore),
+        password
       );
-      await walletsFromLocalstorage.push(newWall);
-      localStorage.setItem("wallets", JSON.stringify(walletsFromLocalstorage));
-    } else {
-      console.log("Invalid wallet address or private key");
+      if (
+        wallet &&
+        ethers.utils.isAddress(wallet.address) &&
+        /^([A-Fa-f0-9]{64})$/.test(wallet.privateKey.substring(2, 66))
+      ) {
+        const newWall = {
+          name: name,
+          address: wallet.address,
+          privateKey: wallet.privateKey.substring(2, 66),
+          password: "",
+        };
+        const walletsFromLocalstorage = await JSON.parse(
+          localStorage.getItem("wallets") || "[]"
+        );
+        await walletsFromLocalstorage.push(newWall);
+        localStorage.setItem(
+          "wallets",
+          JSON.stringify(walletsFromLocalstorage)
+        );
+      } else {
+        console.log("Password or keystore is not correct.");
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      setIsConfirming(false);
+      setImportSuccess(true);
+    } catch (err) {
+      console.log(err);
+      setIsConfirming(false);
+      if ((err as Error).message === "invalid password") {
+        setError("Invalid password.");
+      } else {
+        setError("An unknown error occurred. Please try again.");
+      }
     }
   };
+  useEffect(() => {
+    if (importSuccess) {
+      resetForm();
+      onDidDismiss();
+      history.push("/wallets");
+    }
+  }, [importSuccess, onDidDismiss, history]);
+
   const openExplorer = () => {
     fileInputRef.current?.click();
+  };
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    setSelectedFileName(file?.name || null);
+  };
+  const resetForm = () => {
+    setSelectedFileName(null);
+    setPassword("");
+    setError(null);
   };
   const importAndBack = async (event: any) => {
     const file = fileInputRef.current?.files?.[0];
@@ -115,9 +154,23 @@ const ModalImportFromKeystore: React.FC<ModalProps> = ({
       return;
     }
     try {
+      setError("");
       await importWalletFromKeystore(file, newPassword, newWallName);
-      onDidDismiss();
-      history.push("/wallets");
+      //if (error === "Invalid password.") return;
+      // resetForm();
+      // onDidDismiss();
+      // history.push("/");
+
+      // if (!error) {
+      //   console.log(error);
+      //   resetForm();
+      //   onDidDismiss();
+      //   history.push("/");
+      // }
+
+      // resetForm();
+      // onDidDismiss();
+      // history.push("/wallets");
     } catch (err: any) {
       setError("Password or keystore is not correct.");
       console.log("An error occurred:", err);
@@ -159,7 +212,13 @@ const ModalImportFromKeystore: React.FC<ModalProps> = ({
             >
               {t("Open Keystore")}
             </IonButton>
-            <input type="file" style={{ display: "none" }} ref={fileInputRef} />
+            <input
+              type="file"
+              style={{ display: "none" }}
+              ref={fileInputRef}
+              onChange={handleFileChange}
+            />
+            {selectedFileName && <p>{selectedFileName}</p>}
             <IonInput
               type="text"
               id="newNameFromKeystore"
@@ -189,8 +248,9 @@ const ModalImportFromKeystore: React.FC<ModalProps> = ({
               className="btnImp"
               expand="block"
               onClick={importAndBack}
+              disabled={isConfirming}
             >
-              {t("Confirm")}
+              {isConfirming ? t("Creating") : t("Confirm")}
             </IonButton>
           </div>
         </div>

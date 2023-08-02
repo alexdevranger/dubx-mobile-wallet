@@ -27,15 +27,32 @@ const ModalImportFromPrivate: React.FC<ModalProps> = ({
   const history = useHistory();
   const [error, setError] = useState<string | null>(null);
   const [t, i18n] = useTranslation("global");
+  const [isConfirming, setIsConfirming] = useState(false);
 
   useEffect(() => {
     setError(null);
   }, [isOpen]);
 
+  const resetForm = () => {
+    setError(null);
+    const newFromPrivate = document.getElementById(
+      "newFromPrivate"
+    ) as HTMLInputElement;
+    const newNameFromPrivate = document.getElementById(
+      "newNameFromPrivate"
+    ) as HTMLInputElement;
+
+    if (newFromPrivate && newNameFromPrivate) {
+      newFromPrivate.value = "";
+      newNameFromPrivate.value = "";
+    }
+  };
+
   const importWalletFromPrivateKey = async (
     privateKey: string,
     name: string
   ) => {
+    setIsConfirming(true);
     try {
       const savedNetwork: any = localStorage.getItem("provider") || "testnet";
       const provider = await createProvider(savedNetwork);
@@ -63,8 +80,12 @@ const ModalImportFromPrivate: React.FC<ModalProps> = ({
         setError("Invalid wallet address or private key");
         console.log("Invalid wallet address or private key", Error);
       }
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      setIsConfirming(false);
     } catch (error: any) {
       console.log("An error occurred:", error);
+      setIsConfirming(false);
     }
   };
   const importAndBack = async (event: any) => {
@@ -99,7 +120,9 @@ const ModalImportFromPrivate: React.FC<ModalProps> = ({
       return;
     }
     try {
+      setError("");
       await importWalletFromPrivateKey(newPrivKey, newWallName);
+      resetForm();
       onDidDismiss();
       history.push("/wallets");
     } catch (err: any) {
@@ -156,8 +179,9 @@ const ModalImportFromPrivate: React.FC<ModalProps> = ({
               className="btnImp"
               expand="block"
               onClick={importAndBack}
+              disabled={isConfirming}
             >
-              {t("Confirm")}
+              {isConfirming ? t("Creating") : t("Confirm")}
             </IonButton>
           </div>
         </div>

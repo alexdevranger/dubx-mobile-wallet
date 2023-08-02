@@ -20,7 +20,9 @@
 
 
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
-        <item name="android:background">@drawable/splash</item>
+        <item name="android:background">#0f0e13</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- <item name="android:background">@drawable/splash</item> -->
          <!-- <item name="android:background">#4D4D4D</item> -->
          <!-- kad se stavi ovako onda nema splash screena -->
    

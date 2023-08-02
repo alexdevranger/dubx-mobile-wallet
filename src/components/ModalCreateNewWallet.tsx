@@ -45,17 +45,6 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
         const walletsFromLocalstorage = await JSON.parse(
           localStorage.getItem("wallets") || "[]"
         );
-        // const isNameExists = walletsFromLocalstorage.some(
-        //   (walletItem: any) => walletItem.name === name
-        // );
-
-        // if (isNameExists) {
-        //   setError(
-        //     "Wallet name already exists. Please choose a different name."
-        //   );
-        //   setIsConfirming(false);
-        //   return;
-        // }
 
         const newWall = {
           name: name,
@@ -77,7 +66,7 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
       setIsConfirming(false);
     } catch (err) {
       console.log(err);
-      setIsConfirming(false); // Make sure to set isConfirming back to false even in case of errors
+      setIsConfirming(false);
     }
   };
   const importAndBack = async (event: any) => {
@@ -101,6 +90,7 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
       return;
     }
     try {
+      setError("");
       await createRandomWallet(newWallName);
       onDidDismiss();
       history.push("/");
@@ -108,7 +98,7 @@ const ModalCreateNewWallet: React.FC<ModalProps> = ({
       console.log(err);
     }
   };
-  console.log(isConfirming);
+  // console.log(isConfirming);
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onDidDismiss}>
       <IonHeader>

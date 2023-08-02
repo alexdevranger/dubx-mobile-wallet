@@ -15,10 +15,11 @@ import {
   IonCol,
   IonText,
   IonItem,
+  IonToggle,
 } from "@ionic/react";
 import { arrowBackCircleOutline } from "ionicons/icons";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import "./Settings.css";
 
 interface LangStorage {
@@ -31,7 +32,36 @@ const SettingsPage: React.FC = () => {
     localStorage.getItem("provider") || "testnet"
   );
   const history = useHistory();
+  const location = useLocation();
   const [lang, setLang] = useState<LangStorage>({ language: "en" });
+  const [pinEnabled, setPinEnabled] = useState<boolean>(false);
+  const [appPin, setAppPin] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedPinSetting = localStorage.getItem("pinEnabled");
+    setPinEnabled(storedPinSetting === "true");
+  }, []);
+
+  useEffect(() => {
+    const storedAppPin = localStorage.getItem("appPin");
+    if (storedAppPin && storedAppPin !== "") {
+      setAppPin(storedAppPin);
+    }
+  }, [location]);
+
+  const handlePinToggleChange = () => {
+    setPinEnabled(!pinEnabled);
+    localStorage.setItem("pinEnabled", (!pinEnabled).toString());
+
+    if (!pinEnabled) {
+      localStorage.removeItem("appPin");
+    }
+  };
+
+  const handleSetupPinClick = () => {
+    setPinEnabled(false);
+    history.push("/pin-setup");
+  };
 
   const handleProviderChange = (event: CustomEvent) => {
     const selectedProvider = event.detail.value;
@@ -67,6 +97,7 @@ const SettingsPage: React.FC = () => {
       document.documentElement.setAttribute("dir", "ltr");
     }
   }, [i18n]);
+  console.log(appPin);
 
   return (
     <IonPage dir={lang.language === "ar" ? "rtl" : "ltr"}>
@@ -115,6 +146,47 @@ const SettingsPage: React.FC = () => {
               </IonCol>
             </IonRow>
           </IonRadioGroup>
+          <IonGrid className="ion-text-center ion-grid">
+            <IonRow className="ion-row">
+              <IonCol size="12" className="logo-text">
+                <IonText color="primary">
+                  <h1 className="titleGradient">{t("PIN")}</h1>
+                </IonText>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+          <IonGrid className="ion-text-center ion-grid">
+            <IonRow className="ion-row">
+              <IonCol size="12" className="logo-text flex-col">
+                <IonItem>
+                  <IonLabel>
+                    {appPin ? "Change PIN" : "Enable PIN change"}
+                  </IonLabel>
+                  <IonToggle
+                    checked={pinEnabled}
+                    onIonChange={handlePinToggleChange}
+                  />
+                </IonItem>
+                {pinEnabled && (
+                  // <IonButton onClick={handleSetupPinClick}>
+                  //   I want to setup PIN now
+                  // </IonButton>
+                  <IonText color="medium" className="mt20">
+                    <span
+                      style={{
+                        marginBottom: "10px",
+                        cursor: "pointer",
+                        marginTop: "20px",
+                      }}
+                      onClick={handleSetupPinClick}
+                    >
+                      {t("I want to setup PIN now")}
+                    </span>
+                  </IonText>
+                )}
+              </IonCol>
+            </IonRow>
+          </IonGrid>
           <IonGrid className="ion-text-center ion-grid">
             <IonRow className="ion-row">
               <IonCol size="12" className="logo-text">

@@ -57,6 +57,11 @@ const Menu = () => {
               <IonLabel>{t("Settings")}</IonLabel>
             </IonItem>
           </IonMenuToggle>
+          <IonMenuToggle auto-hide="false">
+            <IonItem button routerLink={"/faq"} routerDirection="none">
+              <IonLabel>{t("FAQ")}</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
         </IonList>
         <div className="submenuHolder">
           <IonText color="primary" className="mb20">
