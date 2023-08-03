@@ -112,7 +112,9 @@ const PinSetup: React.FC<PinSetupProps> = ({ onPinSet, onSkipSetup }) => {
         <IonGrid>
           <IonRow className="pin-setup-row">
             <IonCol className="ion-text-center">
-              <IonText>{t("Enter a 4-digit PIN")}</IonText>
+              <IonText color="medium">
+                <b>{t("Enter a 4-digit PIN")}</b>
+              </IonText>
             </IonCol>
           </IonRow>
           <IonRow>
@@ -127,111 +129,108 @@ const PinSetup: React.FC<PinSetupProps> = ({ onPinSet, onSkipSetup }) => {
           </IonRow>
           <IonRow style={{ marginTop: "40px" }}>
             <IonCol>
-              <IonButton
+              <button
                 className="number-button"
                 onClick={() => handleNumberClick("1")}
               >
                 1
-              </IonButton>
+              </button>
             </IonCol>
             <IonCol>
-              <IonButton
+              <button
                 className="number-button"
                 onClick={() => handleNumberClick("2")}
               >
                 2
-              </IonButton>
+              </button>
             </IonCol>
             <IonCol>
-              <IonButton
+              <button
                 className="number-button"
                 onClick={() => handleNumberClick("3")}
               >
                 3
-              </IonButton>
+              </button>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
-              <IonButton
+              <button
                 className="number-button"
                 onClick={() => handleNumberClick("4")}
               >
                 4
-              </IonButton>
+              </button>
             </IonCol>
             <IonCol>
-              <IonButton
+              <button
                 className="number-button"
                 onClick={() => handleNumberClick("5")}
               >
                 5
-              </IonButton>
+              </button>
             </IonCol>
             <IonCol>
-              <IonButton
+              <button
                 className="number-button"
                 onClick={() => handleNumberClick("6")}
               >
                 6
-              </IonButton>
+              </button>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
-              <IonButton
+              <button
                 className="number-button"
                 onClick={() => handleNumberClick("7")}
               >
                 7
-              </IonButton>
+              </button>
             </IonCol>
             <IonCol>
-              <IonButton
+              <button
                 className="number-button"
                 onClick={() => handleNumberClick("8")}
               >
                 8
-              </IonButton>
+              </button>
             </IonCol>
             <IonCol>
-              <IonButton
+              <button
                 className="number-button"
                 onClick={() => handleNumberClick("9")}
               >
                 9
-              </IonButton>
+              </button>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
-              <IonButton
-                className="number-button"
-                onClick={() => handleDeleteClick()}
-              >
+              <button className="ok" onClick={() => handleDeleteClick()}>
                 {" "}
                 <IonIcon
                   icon={backspace}
                   style={{ fontSize: "30px" }}
                 ></IonIcon>
-              </IonButton>
+              </button>
             </IonCol>
             <IonCol>
-              <IonButton
+              <button
                 className="number-button"
                 onClick={() => handleNumberClick("0")}
               >
                 0
-              </IonButton>
+              </button>
             </IonCol>
             <IonCol>
-              <IonButton
-                className="number-button"
+              <button
+                className="ok"
                 onClick={() => handleConfirmPin()}
                 disabled={isConfirming}
               >
                 OK
-              </IonButton>
+              </button>
             </IonCol>
           </IonRow>
           {error && (

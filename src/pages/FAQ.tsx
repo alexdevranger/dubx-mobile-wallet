@@ -56,11 +56,7 @@ const FAQ: React.FC = () => {
             <IonList slot="content">
               <IonItem>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "Click the PLUS icon on the Wallets page and then click the button 'Create New Wallet'. Give your wallet any name and confirm by clicking the button. You will be redirected to the wallets page with the newly created wallet."
-                    )}
-                  </p>
+                  <p style={{ color: "#797979" }}>{t("Click_PLUS")}</p>
                   <p style={{ color: "#797979" }}>
                     {t(
                       "Before making any deposits to this address, copy and securely export your private key. We don't hold or keep your private keys. They are stored only in the local storage of your cell phone."
@@ -93,16 +89,8 @@ const FAQ: React.FC = () => {
             <IonList slot="content">
               <IonItem>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "If you have the Private Key of your wallet, you can import it by clicking the PLUS icon on the wallets page and then the button 'IMPORT WALLET FROM PRIVATE KEY'. When the modal opens, enter a name for this wallet and the Private Key. After confirming, you will be redirected to the wallets page and see your imported wallet."
-                    )}
-                  </p>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "If you have the Keystore and Password of your wallet, you can import it by clicking the PLUS icon on the wallets page and then the button 'IMPORT WALLET FROM KEYSTORE'. When the modal opens, click the button 'OPEN KEYSTORE', enter a name for this wallet, and the Password. After confirming, you will be redirected to the wallets page and see your imported wallet."
-                    )}
-                  </p>
+                  <p style={{ color: "#797979" }}>{t("IMPORT_PRIVATE KEY")}</p>
+                  <p style={{ color: "#797979" }}>{t("Keystore_Password")}</p>
                 </div>
               </IonItem>
             </IonList>
@@ -118,9 +106,7 @@ const FAQ: React.FC = () => {
               <IonItem>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <p style={{ color: "#797979" }}>
-                    {t(
-                      "To test the wallet's features, click the Settings button and  choose TESTNET as an option. Then, go to"
-                    )}{" "}
+                    {t("testWalletFeatures")}{" "}
                     <a
                       href="https://faucet.arabianchain.org/"
                       target="_blank"
@@ -152,16 +138,8 @@ const FAQ: React.FC = () => {
             <IonList slot="content">
               <IonItem>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "When you change the network to TESTNET on the Settings page, any actions you perform in the wallet will not affect your mainnet DUBX balance. To ensure a smooth experience, we recommend creating 2 new addresses when you first open the wallet. Obtain free TESTNET coins for one of these addresses and try sending them from one address to another."
-                    )}
-                  </p>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "If you lose TESTNET coins, don't worry, you can always obtain new ones. Feel free to spend testnet coins as much as you wish, as we have plenty available for you. This way, you can become comfortable using the wallet safely on the  mainnet without any concerns about testnet coins."
-                    )}
-                  </p>
+                  <p style={{ color: "#797979" }}>{t("network_TESTNET.")}</p>
+                  <p style={{ color: "#797979" }}>{t("loseTESTNET")}</p>
                 </div>
               </IonItem>
             </IonList>
@@ -181,11 +159,7 @@ const FAQ: React.FC = () => {
                       "At the top of the Wallet Detail page, the Network status will indicate whether you are on Testnet or Mainnet. Based on this, you can fill out the form with the recipient's Address and the Amount you want to send in DUBX coins. During the sending process, you will receive real-time updates about the mining status of the transaction."
                     )}
                   </p>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "Once the transaction is mined and confirmed, you can click  on the 'TX INFO' button to access all the relevant information about the transaction. This includes details such as the Transaction Hash, Block Number, Timestamp, Address From, Address To, and the sent Amount. You can easily copy this data by clicking the copy icon located on the right side of each field."
-                    )}
-                  </p>
+                  <p style={{ color: "#797979" }}>{t("TXINFO_history")}</p>
                 </div>
               </IonItem>
             </IonList>
@@ -223,16 +197,8 @@ const FAQ: React.FC = () => {
             <IonList slot="content">
               <IonItem>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "If you are on the MAINNET network, you can find an icon at the bottom of the Wallet Detail Page. Clicking this icon will display the last 5 transactions for the specific wallet you are currently viewing. The transaction history is retrieved using an API and serves as a relevant source of information. You can copy all the data from each transaction by clicking the copy icon located on the right side of each field."
-                    )}
-                  </p>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "On the other hand, if you are on the TESTNET network, you will see the last 5 transactions for all wallets. These transactions are stored locally in the mobile phone's storage. However, it's important to note that if you restart your phone or clear the cache, this TESTNET transaction history will be lost."
-                    )}
-                  </p>
+                  <p style={{ color: "#797979" }}>{t("Wallet_Detail_Page")}</p>
+                  <p style={{ color: "#797979" }}>{t("TESTNET_tx")}</p>
                 </div>
               </IonItem>
             </IonList>
@@ -247,11 +213,7 @@ const FAQ: React.FC = () => {
             <IonList slot="content">
               <IonItem>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "This button is very useful for clearing all the data in the form, including the 'Address To,' 'Amount,' and 'TX INFO' fields. It essentially functions as a refresh button, allowing you to start anew when sending coins. Clicking this button will clear the existing data, providing a clean slate for your next transaction."
-                    )}
-                  </p>
+                  <p style={{ color: "#797979" }}>{t("clearing")}</p>
                 </div>
               </IonItem>
             </IonList>
@@ -268,11 +230,7 @@ const FAQ: React.FC = () => {
             <IonList slot="content">
               <IonItem>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "To delete this wallet, click on the 'Remove Wallet' button. Please read the warning message carefully before proceeding with the deletion."
-                    )}
-                  </p>
+                  <p style={{ color: "#797979" }}>{t("delete_wallet")}</p>
                 </div>
               </IonItem>
             </IonList>

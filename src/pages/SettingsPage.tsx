@@ -46,8 +46,20 @@ const SettingsPage: React.FC = () => {
     const storedAppPin = localStorage.getItem("appPin");
     if (storedAppPin && storedAppPin !== "") {
       setAppPin(storedAppPin);
+      // } else {
+      //   setAppPin(null);
     }
-  }, [location]);
+    console.log("storedAppPin", storedAppPin);
+  }, [location, pinEnabled]);
+  useEffect(() => {
+    const storedAppPin = localStorage.getItem("appPin");
+    if (storedAppPin && storedAppPin !== "") {
+      setAppPin(storedAppPin);
+      // } else {
+      //   setAppPin(null);
+    }
+    console.log("storedAppPin", storedAppPin);
+  }, []);
 
   const handlePinToggleChange = () => {
     setPinEnabled(!pinEnabled);
@@ -59,6 +71,7 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleSetupPinClick = () => {
+    setAppPin(null);
     setPinEnabled(false);
     history.push("/pin-setup");
   };

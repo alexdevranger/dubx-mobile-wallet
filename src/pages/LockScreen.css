@@ -19,7 +19,7 @@ ion-button.pin {
 .lock-screen-circle {
   width: 40px;
   height: 40px;
-  border: 2px solid #df7fef;
+  border: 2px solid #9f7cee;
   border-radius: 50%;
   transition: background-color 0.2s ease;
 }
@@ -27,9 +27,9 @@ ion-button.pin {
 .lock-screen-circle-filled {
   width: 40px;
   height: 40px;
-  border: 2px solid #df7fef;
+  border: 2px solid #9f7cee;
   border-radius: 50%;
-  background-color: #df7fef;
+  background-color: #9f85f0;
   transition: background-color 0.2s ease;
 }
 
@@ -68,16 +68,51 @@ ion-button.pin {
   justify-content: center;
   align-items: center;
   margin: auto;
-  background-color: #ffffff;
-  border: 2px solid #df7fef;
-  border-radius: 50%;
-  color: #df7fef;
+  background-color: transparent;
+  border: 2px solid #1bf8ec;
+  border-radius: 7px;
+  color: #673ab7;
+  background-image: linear-gradient(
+    to right,
+    #a26df1 0%,
+    #1bf8ec 51%,
+    #7e57c2 100%
+  );
+  background-size: 200% auto;
   transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s;
 
   /* Add hover effect */
   &:hover {
-    background-color: #df7fef;
     color: #ffffff;
+    transform: scale(1.1);
+  }
+}
+.ok {
+  width: 80px;
+  height: 80px;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: transparent;
+  border: 2px solid #1bf8ec;
+  border-radius: 7px;
+  color: #673ab7;
+  background-image: linear-gradient(
+    to right,
+    #776ffc 0%,
+    #ad80e9 51%,
+    #7e57c2 100%
+  );
+  background-size: 200% auto;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s;
+
+  /* Add hover effect */
+  &:hover {
+    color: #ffffff;
+    border: 2px solid #fff;
     transform: scale(1.1);
   }
 }
@@ -125,4 +160,19 @@ ion-button.pin {
   margin: auto;
   width: 100%;
   margin-top: 40px;
+}
+.ok:disabled {
+  /* Styles for disabled state */
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  border-color: #a0a0a0;
+  cursor: not-allowed;
+}
+.ok:hover:disabled {
+  /* Styles for disabled state */
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  border-color: #a0a0a0;
+  cursor: not-allowed;
+  transform: scale(1);
 }
