@@ -223,3 +223,18 @@ hr.hr {
   align-items: center;
   flex-direction: row;
 }
+.address-input {
+  flex: 1;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.scanner-holder {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px 10px 5px;
+  /* display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center; */
+}

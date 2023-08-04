@@ -39,7 +39,7 @@ const FAQ: React.FC = () => {
               <IonText color="primary">
                 <h1 className="titleGradient">{t("WALLET GUIDE")}</h1>
                 <p className="subtitleP">
-                  {t("GOLD RULE: Copy Private Key ")}{" "}
+                  {t("GOLDEN RULE: Copy Private Key ")}{" "}
                 </p>
               </IonText>
             </IonCol>
@@ -49,7 +49,7 @@ const FAQ: React.FC = () => {
           <IonAccordion value="newwallet">
             <IonItem slot="header">
               <IonLabel color="medium">
-                <b>{t("CREATE NEW WALLET")}</b>
+                <b>{t("CREATE_NEW")}</b>
               </IonLabel>
               <IonIcon icon={ellipse} slot="start" color="primary" />
             </IonItem>
@@ -98,7 +98,7 @@ const FAQ: React.FC = () => {
           <IonAccordion value="network">
             <IonItem slot="header">
               <IonLabel color="medium">
-                <b>{t("MAINNET vs TESTNET")}</b>
+                <b>{t("Mainnet vs Testnet")}</b>
               </IonLabel>
               <IonIcon icon={ellipse} slot="start" color="primary" />
             </IonItem>
@@ -154,12 +154,114 @@ const FAQ: React.FC = () => {
             <IonList slot="content">
               <IonItem>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <p style={{ color: "#797979" }}>
-                    {t(
-                      "At the top of the Wallet Detail page, the Network status will indicate whether you are on Testnet or Mainnet. Based on this, you can fill out the form with the recipient's Address and the Amount you want to send in DUBX coins. During the sending process, you will receive real-time updates about the mining status of the transaction."
-                    )}
-                  </p>
+                  <p style={{ color: "#797979" }}>{t("Network_status")}</p>
                   <p style={{ color: "#797979" }}>{t("TXINFO_history")}</p>
+                </div>
+              </IonItem>
+            </IonList>
+          </IonAccordion>
+          <IonAccordion value="setup_PIN">
+            <IonItem slot="header">
+              <IonLabel color="medium">
+                <b>{t("Setup_PIN")}</b>
+              </IonLabel>
+              <IonIcon icon={ellipse} slot="start" color="primary" />
+            </IonItem>
+            <IonList slot="content">
+              <IonItem>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <p style={{ color: "#797979" }}>{t("First_opening")}</p>
+                  <p style={{ color: "#797979" }}>{t("How to setup PIN")}</p>
+                </div>
+              </IonItem>
+            </IonList>
+          </IonAccordion>
+          <IonAccordion value="saved_PIN">
+            <IonItem slot="header">
+              <IonLabel color="medium">
+                <b>{t("Where is PIN saved")}</b>
+              </IonLabel>
+              <IonIcon icon={ellipse} slot="start" color="primary" />
+            </IonItem>
+            <IonList slot="content">
+              <IonItem>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <p style={{ color: "#797979" }}>{t("Saved_PIN")}</p>
+                </div>
+              </IonItem>
+            </IonList>
+          </IonAccordion>
+          <IonAccordion value="skipped_PIN">
+            <IonItem slot="header">
+              <IonLabel color="medium">
+                <b>{t("Skip PIN Setup")}</b>
+              </IonLabel>
+              <IonIcon icon={ellipse} slot="start" color="primary" />
+            </IonItem>
+            <IonList slot="content">
+              <IonItem>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <p style={{ color: "#797979" }}>{t("Skip_PIN")}</p>
+                </div>
+              </IonItem>
+            </IonList>
+          </IonAccordion>
+          <IonAccordion value="remove_PIN">
+            <IonItem slot="header">
+              <IonLabel color="medium">
+                <b>{t("How to remove PIN")}</b>
+              </IonLabel>
+              <IonIcon icon={ellipse} slot="start" color="primary" />
+            </IonItem>
+            <IonList slot="content">
+              <IonItem>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <p style={{ color: "#797979" }}>{t("Remove_PIN")}</p>
+                </div>
+              </IonItem>
+            </IonList>
+          </IonAccordion>
+          <IonAccordion value="change_PIN">
+            <IonItem slot="header">
+              <IonLabel color="medium">
+                <b>{t("Change_PIN_code")}</b>
+              </IonLabel>
+              <IonIcon icon={ellipse} slot="start" color="primary" />
+            </IonItem>
+            <IonList slot="content">
+              <IonItem>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <p style={{ color: "#797979" }}>{t("Change_PIN_with_new")}</p>
+                </div>
+              </IonItem>
+            </IonList>
+          </IonAccordion>
+          <IonAccordion value="unlock_PIN">
+            <IonItem slot="header">
+              <IonLabel color="medium">
+                <b>{t("Unlock_wallet")}</b>
+              </IonLabel>
+              <IonIcon icon={ellipse} slot="start" color="primary" />
+            </IonItem>
+            <IonList slot="content">
+              <IonItem>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <p style={{ color: "#797979" }}>{t("Unlock")}</p>
+                </div>
+              </IonItem>
+            </IonList>
+          </IonAccordion>
+          <IonAccordion value="reenable_PIN">
+            <IonItem slot="header">
+              <IonLabel color="medium">
+                <b>{t("I_skipped")}</b>
+              </IonLabel>
+              <IonIcon icon={ellipse} slot="start" color="primary" />
+            </IonItem>
+            <IonList slot="content">
+              <IonItem>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <p style={{ color: "#797979" }}>{t("Reenable")}</p>
                 </div>
               </IonItem>
             </IonList>
@@ -257,7 +359,7 @@ const FAQ: React.FC = () => {
           <IonAccordion value="manu">
             <IonItem slot="header">
               <IonLabel color="medium">
-                <b>{t("MANU")}</b>
+                <b>{t("MENU")}</b>
               </IonLabel>
               <IonIcon icon={ellipse} slot="start" color="primary" />
             </IonItem>

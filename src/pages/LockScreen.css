@@ -80,12 +80,10 @@ ion-button.pin {
   );
   background-size: 200% auto;
   transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s;
-
-  /* Add hover effect */
-  &:hover {
-    color: #ffffff;
-    transform: scale(1.1);
-  }
+}
+.number-button:hover {
+  color: #ffffff;
+  transform: scale(1.1);
 }
 .ok {
   width: 80px;
@@ -108,13 +106,10 @@ ion-button.pin {
   );
   background-size: 200% auto;
   transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s;
-
-  /* Add hover effect */
-  &:hover {
-    color: #ffffff;
-    border: 2px solid #fff;
-    transform: scale(1.1);
-  }
+}
+.ok:hover {
+  color: #ffffff;
+  transform: scale(1.1);
 }
 .pin-display {
   width: 100%;

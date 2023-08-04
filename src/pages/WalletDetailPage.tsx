@@ -14,15 +14,18 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonTextarea,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ModalQRCode from "../components/ModalQRCode";
 import ModalTXHistory from "../components/ModalTXHistory";
+import NativeBarcodeScanner from "../components/NativeBarcodeScanner";
 import { useTranslation } from "react-i18next";
 import { ethers } from "ethers";
 import { getBalance, createProvider, getTx } from "../utils/helper";
 import { Clipboard } from "@capacitor/clipboard";
+
 import {
   arrowBackCircleOutline,
   openOutline,
@@ -59,6 +62,7 @@ const WalletDetailPage: React.FC = () => {
   const [showTxInfo, setShowTxInfo] = useState(false);
   const [waiting, setWaiting] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [scannedAddress, setScannedAddress] = useState("");
 
   const [txObject, setTxObject] = useState({
     network: "",
@@ -303,6 +307,10 @@ const WalletDetailPage: React.FC = () => {
       amount: "",
     });
   };
+
+  const handleScannedAddress = (address: string) => {
+    setScannedAddress(address);
+  };
   //console.log(i18n.language);
   //console.log("isDisabled", isDisabled);
 
@@ -444,23 +452,36 @@ const WalletDetailPage: React.FC = () => {
             }`}
           >
             <div style={{ margin: "20px 10px 10px 10px" }}>
-              <IonInput
-                type="text"
-                id="addressTo"
-                style={{
-                  fontSize: "14px",
-                  display: "inline-block",
-                  whiteSpace: "pre-line",
-                  overflowWrap: "break-word",
-                  wordBreak: "break-word",
-                  hyphens: "auto",
-                  width: "100%",
-                }}
-                color="medium"
-                labelPlacement="stacked"
-                label={t("Address To")}
-                placeholder=""
-              ></IonInput>{" "}
+              <div className="scanner-holder">
+                <IonTextarea
+                  id="addressTo"
+                  className="address-input"
+                  // style={{
+                  //   fontSize: "14px",
+                  //   display: "inline-block",
+                  //   whiteSpace: "pre-line",
+                  //   overflowWrap: "break-word",
+                  //   wordBreak: "break-word",
+                  //   hyphens: "auto",
+                  //   width: "100%",
+                  //   marginTop: "10px",
+                  // }}
+                  color="medium"
+                  labelPlacement="stacked"
+                  label={t("Address To")}
+                  placeholder=""
+                  value={scannedAddress}
+                  // rows={2}
+                  onIonChange={(e) => setScannedAddress(e.detail.value!)}
+                >
+                  {" "}
+                </IonTextarea>{" "}
+                <span>
+                  <NativeBarcodeScanner
+                    onScannedAddress={handleScannedAddress}
+                  />
+                </span>
+              </div>
               <IonInput
                 type="number"
                 id="amount"

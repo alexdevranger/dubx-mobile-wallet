@@ -173,7 +173,7 @@ const SettingsPage: React.FC = () => {
               <IonCol size="12" className="logo-text flex-col">
                 <IonItem>
                   <IonLabel>
-                    {appPin ? "Change PIN" : "Enable PIN change"}
+                    {appPin ? t("Change PIN") : t("Enable PIN setup")}
                   </IonLabel>
                   <IonToggle
                     checked={pinEnabled}

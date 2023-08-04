@@ -1,0 +1,60 @@
+#frame-content:before,
+#frame-content:after,
+#frame-content > :last-child:before,
+#frame-content > :last-child:after {
+  position: absolute;
+  width: 60px;
+  height: 50px;
+  border-color: white;
+  border-style: solid;
+  content: " ";
+}
+
+#frame-content:before {
+  top: 30%;
+  left: 15%;
+  border-width: 1px 0 0 1px;
+}
+
+#frame-content:after {
+  top: 30%;
+  right: 15%;
+  border-width: 1px 1px 0 0;
+}
+
+#frame-content > :last-child:before {
+  bottom: 30%;
+  right: 15%;
+  border-width: 0 1px 1px 0;
+}
+
+#frame-content > :last-child:after {
+  bottom: 30%;
+  left: 15%;
+  border-width: 0 0 1px 1px;
+}
+#frame-content #frame-message {
+  bottom: 30%;
+}
+.scan {
+  width: 116px;
+  border-radius: 3px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.scan-circle {
+  background-color: #ffffff;
+  border: 2px solid #8b50c7;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.scan-circle ion-icon {
+  font-size: 24px;
+  color: #8b50c7;
+}
