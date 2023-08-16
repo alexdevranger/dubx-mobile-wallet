@@ -74,9 +74,9 @@ const ModalQRCode: React.FC<ModalProps> = ({
     <IonModal
       isOpen={isOpen}
       onDidDismiss={onDidDismiss}
-      breakpoints={[0, 0.2, 0.5, 1]}
-      initialBreakpoint={0.5}
-      backdropBreakpoint={0.2}
+      // breakpoints={[0, 0.2, 0.5, 1]}
+      // initialBreakpoint={0.5}
+      // backdropBreakpoint={0.2}
     >
       <IonHeader>
         <IonToolbar>

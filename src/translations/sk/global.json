@@ -113,5 +113,10 @@
   "Change_PIN_with_new": "Ak v súčasnosti máte nastavený PIN, ale rozhodnete sa ho zmeniť, prejdite na stránku Nastavenia a kliknite na 'Zmeniť alebo odstrániť PIN'. Tým sa odstráni starý PIN a zobrazí sa 'Chcem nastaviť, zmeniť alebo odstrániť PIN'. Kliknutím na tento odkaz budete presmerovaní na počiatočnú obrazovku nastavenia, kde si môžete nastaviť nový PIN.",
   "Unlock": "Ak ste úspešne nastavili PIN, pri každom otvorení peňaženky budete vyzvaní na zadanie PIN na odomknutie peňaženky.",
   "I_skipped": "Opätovne povoliť PIN",
-  "Reenable": "Ak ste predtým preskočili nastavenie PIN, ale zmenili ste názor, prejdite na stránku Nastavenia a kliknite na 'Povoliť nastavenie PIN'. Tým budete presmerovaní na počiatočnú obrazovku nastavenia, kde si môžete nastaviť PIN."
+  "Reenable": "Ak ste predtým preskočili nastavenie PIN, ale zmenili ste názor, prejdite na stránku Nastavenia a kliknite na 'Povoliť nastavenie PIN'. Tým budete presmerovaní na počiatočnú obrazovku nastavenia, kde si môžete nastaviť PIN.",
+  "Incorrect PIN. Please try again.": "Nesprávny PIN. Skúste to prosím znova.",
+  "Enter PIN": "Zadajte PIN",
+  "Set PIN": "Nastaviť PIN",
+  "Enter a 4-digit PIN": "Zadajte 4-ciferný PIN",
+  "Confirm PIN": "Potvrďte PIN"
 }

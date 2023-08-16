@@ -46,7 +46,7 @@
   "Wallet detail": "Wallet detail",
   "Network": "Network",
   "Sending Tx ...": "Sending Tx ...",
-  "SHOW TX INFO": "SHOW TX INFO",
+  "SHOW TX INFO": "Show Tx Info",
   "TxHash": "TxHash",
   "To": "To",
   "From": "From",
@@ -113,5 +113,10 @@
   "Change_PIN_with_new": "If you currently have a PIN, but decide to change it, go to the Settings page and click 'Change or Remove PIN.' This will delete the old PIN and display 'I want to setup, change, or remove PIN now.' By clicking this, you will be redirected to the initial setup screen where you can set up a new PIN. ",
   "Unlock": "If you have successfully set up a PIN, every time you open the wallet, you will be asked to enter the PIN to unlock the wallet.",
   "I_skipped": "Reenable PIN",
-  "Reenable": "If you previously skipped setting up a PIN but have changed your mind, go to the Settings page and click 'Enable PIN setup.' By clicking this, you will be redirected to the initial setup screen where you can set up a PIN."
+  "Reenable": "If you previously skipped setting up a PIN but have changed your mind, go to the Settings page and click 'Enable PIN setup.' By clicking this, you will be redirected to the initial setup screen where you can set up a PIN.",
+  "Incorrect PIN. Please try again.": "Incorrect PIN. Please try again.",
+  "Enter PIN": "Enter PIN",
+  "Set PIN": "Set PIN",
+  "Enter a 4-digit PIN": "Enter a 4-digit PIN",
+  "Confirm PIN": "Confirm PIN"
 }

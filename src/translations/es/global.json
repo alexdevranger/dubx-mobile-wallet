@@ -114,5 +114,10 @@
   "Change_PIN_with_new": "Si actualmente tienes un PIN, pero deseas cambiarlo, ve a la página de Configuraciones y haz clic en 'Cambiar o eliminar PIN'. Esto eliminará el PIN antiguo y mostrará 'Quiero configurar, cambiar o eliminar el PIN ahora'. Al hacer clic en esto, serás redirigido a la pantalla de configuración inicial donde podrás configurar un nuevo PIN.",
   "Unlock": "Si has configurado exitosamente un PIN, cada vez que abras la billetera se te pedirá ingresar el PIN para desbloquearla.",
   "I_skipped": "Reactivar el PIN",
-  "Reenable": "Si previamente omitiste la configuración de un PIN pero has cambiado de opinión, ve a la página de Configuraciones y haz clic en 'Habilitar configuración de PIN'. Al hacer clic en esto, serás redirigido a la pantalla de configuración inicial donde podrás configurar un PIN."
+  "Reenable": "Si previamente omitiste la configuración de un PIN pero has cambiado de opinión, ve a la página de Configuraciones y haz clic en 'Habilitar configuración de PIN'. Al hacer clic en esto, serás redirigido a la pantalla de configuración inicial donde podrás configurar un PIN.",
+  "Incorrect PIN. Please try again.": "PIN incorrecto. Por favor, inténtelo de nuevo.",
+  "Enter PIN": "Ingresar PIN",
+  "Set PIN": "Establecer PIN",
+  "Enter a 4-digit PIN": "Ingrese un PIN de 4 dígitos",
+  "Confirm PIN": "Confirmar PIN"
 }

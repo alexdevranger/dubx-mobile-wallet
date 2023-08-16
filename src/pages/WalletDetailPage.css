@@ -5,7 +5,7 @@
 }
 
 .pHeightKey {
-  height: 60px;
+  height: 50px;
   display: block;
 }
 .custom-toast {
@@ -61,11 +61,14 @@
   background-clip: text;
   font-family: Poppins, sans-serif;
   font-weight: 700 !important;
-  margin-top: 40px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   color: #797979;
+}
+.mx20 {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
 }
 .sendHolder {
   max-height: 0;
@@ -80,6 +83,11 @@
 
 .sendHolder.visible {
   max-height: 500px;
+  background: hsla(0, 0%, 100%, 0.05);
+  background-size: 150%;
+  border: 1px solid hsla(0, 0%, 100%, 0.3);
+  border-radius: 16px;
+  margin-bottom: 10px;
 }
 .error-message {
   color: #9f69ff;
@@ -98,13 +106,17 @@
   color: #797979;
   text-align: left;
 }
+.mb35 {
+  margin-bottom: 35px;
+}
+
 .mining-btn-toggle {
   color: #797979;
   text-align: center;
   --background: transparent !important;
   margin: auto;
   border: 1px solid grey;
-  width: 66%;
+  width: 100%;
   border-radius: 6px;
   display: flex;
   justify-content: center;
@@ -156,7 +168,7 @@
 }
 .page-container {
   position: relative;
-  padding-bottom: 60px;
+  padding-bottom: 30px;
 }
 .btn-remove {
   text-transform: none;
@@ -186,7 +198,7 @@ hr.hr {
   height: 1px;
   border-width: 0;
   box-sizing: content-box;
-  margin-top: 2.5rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   border: 0;
   border-top: 1px solid rgb(255 255 255 / 20%);
@@ -219,7 +231,7 @@ hr.hr {
 }
 .btnsHolder {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row;
 }

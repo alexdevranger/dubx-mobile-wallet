@@ -108,7 +108,7 @@ const LockScreen: React.FC<LockScreenProps> = ({ onUnlock }) => {
           <IonRow
             className={`lock-screen-alert ${showIncorrectPin ? "show" : ""}`}
           >
-            <p>Incorrect PIN. Please try again.</p>
+            <p>{t("Incorrect PIN. Please try again.")}</p>
           </IonRow>
           {/* )} */}
           <IonRow style={{ marginTop: "40px" }}>

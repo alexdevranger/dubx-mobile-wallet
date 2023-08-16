@@ -114,5 +114,10 @@
   "Change_PIN_with_new": "Jeśli obecnie masz ustawiony PIN, ale zdecydujesz się go zmienić, przejdź do strony Ustawień i kliknij „Zmień lub usuń PIN”. Spowoduje to usunięcie starego PIN-u i wyświetli „Chcę teraz skonfigurować, zmienić lub usunąć PIN”. Kliknięcie tego spowoduje przekierowanie na stronę początkową konfiguracji, gdzie będziesz mógł skonfigurować nowy PIN.",
   "Unlock": "Jeśli pomyślnie skonfigurowałeś PIN, za każdym razem, gdy otworzysz portfel, zostaniesz poproszony o wprowadzenie PIN-u w celu odblokowania portfela.",
   "I_skipped": "Aktywuj ponownie PIN",
-  "Reenable": "Jeśli wcześniej pominąłeś konfigurację PIN-u, ale zmieniłeś zdanie, przejdź do strony Ustawień i kliknij „Włącz konfigurację PIN”. Kliknięcie tego spowoduje przekierowanie na stronę początkową konfiguracji, gdzie będziesz mógł skonfigurować PIN."
+  "Reenable": "Jeśli wcześniej pominąłeś konfigurację PIN-u, ale zmieniłeś zdanie, przejdź do strony Ustawień i kliknij „Włącz konfigurację PIN”. Kliknięcie tego spowoduje przekierowanie na stronę początkową konfiguracji, gdzie będziesz mógł skonfigurować PIN.",
+  "Incorrect PIN. Please try again.": "Nieprawidłowy kod PIN. Proszę spróbować ponownie.",
+  "Enter PIN": "Wprowadź kod PIN",
+  "Set PIN": "Ustaw kod PIN",
+  "Enter a 4-digit PIN": "Wprowadź 4-cyfrowy kod PIN",
+  "Confirm PIN": "Potwierdź PIN"
 }

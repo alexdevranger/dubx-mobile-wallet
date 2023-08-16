@@ -98,37 +98,37 @@ const WalletDetailPage: React.FC = () => {
     };
     getAddrBalance(address);
   }, [location, minedTx, address, currentNetwork]);
+
+  const clearFormFields = () => {
+    const addressToInput = document.getElementById(
+      "addressTo"
+    ) as HTMLTextAreaElement;
+    const amountInput = document.getElementById("amount") as HTMLInputElement;
+
+    if (addressToInput) {
+      addressToInput.value = "";
+      setScannedAddress("");
+    }
+
+    if (amountInput) {
+      amountInput.value = "";
+    }
+
+    setError("");
+    setPendingTx(false);
+    setMinedTx(false);
+    setHash("");
+    setShowTxInfo(false);
+    setWaiting(false);
+    setTxObject({
+      network: "",
+      from: "",
+      to: "",
+      amount: "",
+    });
+  };
   useEffect(() => {
-    const clearAll = () => {
-      const addressToInput = document.getElementById(
-        "addressTo"
-      ) as HTMLInputElement;
-      const amountInput = document.getElementById("amount") as HTMLInputElement;
-      addressToInput.focus();
-
-      if (addressToInput) {
-        addressToInput.value = "";
-      }
-
-      if (amountInput) {
-        amountInput.value = "";
-      }
-
-      setError("");
-      setPendingTx(false);
-      setMinedTx(false);
-      setHash("");
-      setShowTxInfo(false);
-      setWaiting(false);
-      setTxObject({
-        network: "",
-        from: "",
-        to: "",
-        amount: "",
-      });
-    };
-
-    clearAll();
+    clearFormFields();
   }, [location, address, currentNetwork]);
   //console.log("balance", balance);
   const walletsFromLocalStorage = JSON.parse(
@@ -193,6 +193,8 @@ const WalletDetailPage: React.FC = () => {
         setError("Amount must be less then balance");
         throw Error("Amount must be less then balance");
       }
+
+      console.log(addrTo);
 
       if (
         addrTo &&
@@ -415,7 +417,7 @@ const WalletDetailPage: React.FC = () => {
               )}
             </IonText>
           </IonLabel>
-          <div className="btn-holder">
+          <div className="btn-holder mb35">
             <IonButton
               onClick={togglePrivateKeyVisibility}
               className="btn-pr"
@@ -432,10 +434,10 @@ const WalletDetailPage: React.FC = () => {
               {t("Copy Private Key")}
             </IonButton>
           </div>
-          <hr className="hr" />
+          {/* <hr className="hr" /> */}
 
           <h2
-            className="easySend mining-btn-toggle mb40 mt40"
+            className="easySend mining-btn-toggle mx20"
             style={{ position: "relative" }}
             onClick={toggleSendHolder}
           >
@@ -446,32 +448,17 @@ const WalletDetailPage: React.FC = () => {
               style={{ paddingLeft: "7px" }}
             ></IonIcon>
           </h2>
-          <div
-            className={`sendHolder item-card ${
-              isSendHolderVisible ? "visible" : ""
-            }`}
-          >
+          <div className={`sendHolder ${isSendHolderVisible ? "visible" : ""}`}>
             <div style={{ margin: "20px 10px 10px 10px" }}>
               <div className="scanner-holder">
                 <IonTextarea
                   id="addressTo"
                   className="address-input"
-                  // style={{
-                  //   fontSize: "14px",
-                  //   display: "inline-block",
-                  //   whiteSpace: "pre-line",
-                  //   overflowWrap: "break-word",
-                  //   wordBreak: "break-word",
-                  //   hyphens: "auto",
-                  //   width: "100%",
-                  //   marginTop: "10px",
-                  // }}
                   color="medium"
                   labelPlacement="stacked"
                   label={t("Address To")}
                   placeholder=""
                   value={scannedAddress}
-                  // rows={2}
                   onIonChange={(e) => setScannedAddress(e.detail.value!)}
                 >
                   {" "}
@@ -525,9 +512,9 @@ const WalletDetailPage: React.FC = () => {
             </>
           )}
           {minedTx && (
-            <div className="mt40 mb40">
+            <div className="mb40">
               <p
-                className="easySend ion-text-center mining-btn-toggle mt40"
+                className="easySend ion-text-center mining-btn-toggle mx20"
                 style={{
                   background: "transparent !important",
                   margin: "25px auto",
@@ -724,7 +711,7 @@ const WalletDetailPage: React.FC = () => {
               <br /> {t("History")}
             </p>
           </button>
-          <button className="detail" onClick={clearAll}>
+          <button className="detail" onClick={clearFormFields}>
             <IonIcon
               icon={reloadCircleSharp}
               color="dark"

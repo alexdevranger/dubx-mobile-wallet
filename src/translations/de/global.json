@@ -113,5 +113,10 @@
   "Change_PIN_with_new": "Wenn Sie derzeit eine PIN haben, aber diese ändern möchten, gehen Sie zu den Einstellungen und klicken Sie auf 'PIN ändern oder entfernen'. Dadurch wird die alte PIN gelöscht und 'Ich möchte jetzt eine PIN einrichten, ändern oder entfernen' wird angezeigt. Durch Anklicken werden Sie zur ursprünglichen Einrichtungsoberfläche weitergeleitet, wo Sie eine neue PIN einrichten können.",
   "Unlock": "Wenn Sie erfolgreich eine PIN eingerichtet haben, werden Sie jedes Mal, wenn Sie die Wallet öffnen, aufgefordert, die PIN einzugeben, um die Wallet zu entsperren.",
   "I_skipped": "PIN wieder aktivieren",
-  "Reenable": "Wenn Sie die Einrichtung einer PIN zuvor übersprungen haben, es sich aber anders überlegt haben, gehen Sie zu den Einstellungen und klicken Sie auf 'PIN-Einrichtung aktivieren'. Durch Anklicken werden Sie zur ursprünglichen Einrichtungsoberfläche weitergeleitet, wo Sie eine PIN einrichten können."
+  "Reenable": "Wenn Sie die Einrichtung einer PIN zuvor übersprungen haben, es sich aber anders überlegt haben, gehen Sie zu den Einstellungen und klicken Sie auf 'PIN-Einrichtung aktivieren'. Durch Anklicken werden Sie zur ursprünglichen Einrichtungsoberfläche weitergeleitet, wo Sie eine PIN einrichten können.",
+  "Incorrect PIN. Please try again.": "Falsche PIN. Bitte versuchen Sie es erneut.",
+  "Enter PIN": "PIN eingeben",
+  "Set PIN": "PIN festlegen",
+  "Enter a 4-digit PIN": "Geben Sie eine 4-stellige PIN ein",
+  "Confirm PIN": "PIN bestätigen"
 }

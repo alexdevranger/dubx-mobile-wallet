@@ -113,5 +113,10 @@
   "Change_PIN_with_new": "Ako trenutno imate PIN, ali odlučite da ga promenite, idite na stranicu Podešavanja i kliknite na 'Promeni ili ukloni PIN'. Time će biti obrisan stari PIN i prikazaće se 'Želim da postavim, promenim ili uklonim PIN'. Klikom na ovu opciju bićete preusmereni na početni ekran podešavanja, gde možete postaviti novi PIN.",
   "Unlock": "Ako ste uspešno postavili PIN, svaki put kada otvorite novčanik, bićete zamoljeni da unesete PIN kako biste ga otključali.",
   "I_skipped": "Omogući ponovo PIN",
-  "Reenable": "Ako ste ranije preskočili podešavanje PIN-a, ali ste promenili mišljenje, idite na stranicu Podešavanja i kliknite na 'Omogući podešavanje PIN-a'. Time ćete biti preusmereni na početni ekran podešavanja, gde možete postaviti PIN."
+  "Reenable": "Ako ste ranije preskočili podešavanje PIN-a, ali ste promenili mišljenje, idite na stranicu Podešavanja i kliknite na 'Omogući podešavanje PIN-a'. Time ćete biti preusmereni na početni ekran podešavanja, gde možete postaviti PIN.",
+  "Incorrect PIN. Please try again.": "Netačan PIN. Molim vas pokušajte ponovo.",
+  "Enter PIN": "Unesite PIN",
+  "Set PIN": "Postavi PIN",
+  "Enter a 4-digit PIN": "Unesite 4-cifreni PIN",
+  "Confirm PIN": "Potvrdite PIN"
 }
