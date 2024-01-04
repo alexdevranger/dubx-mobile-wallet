@@ -206,6 +206,8 @@ const WalletDetailPage: React.FC = () => {
         const transaction = {
           to: addrTo,
           value: ethers.utils.parseEther(`${amountDubx}`),
+          gasLimit: 90000,
+          gasPrice: 20000000000,
         };
         setWaiting(true);
         setIsDisabled(true);
